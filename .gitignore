@@ -21,3 +21,62 @@
 /yarn-error.log
 
 .byebug_history
+
+*.sublime-*
+
+# Ignore VI swap files
+*.swp
+**/*.swp
+
+# Ignore bundler config.
+/.bundle
+/vendor/bundle
+
+# Ignore bundler binstubs for now.
+/bin
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore dump files
+/db/*.sql
+/db/*dump.bz2
+/db/*dump.sql.bz2
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/logs
+/tmp
+/spec/tmp
+/data
+/run
+/coverage
+
+# Ignore local config files
+/config/settings.local.yml
+
+# Ignore public asset files
+public/assets
+public/system
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+.ruby-gemset
+
+# if using bower-rails ignore default bower_components path bower.json files
+/vendor/assets/bower_components
+*.bowerrc
+bower.json
+
+# Ignore pow environment settings
+.powenv
+.powrc
+
+# Ignore config/personal_env.rb
+config/personal_env.rb
+**/config/personal_env.rb
+
+# Ignore Mac .DS_Store
+.DS_Store
+**/.DS_Store
