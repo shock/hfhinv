@@ -7,4 +7,6 @@ p
   |  #{@article.text}
 
 p
-  = link_to "Back", articles_path
+  = link_to "Index", articles_path
+  | &nbsp;
+  = link_to "Edit", edit_article_path(@article)
