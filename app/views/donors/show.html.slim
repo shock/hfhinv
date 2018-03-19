@@ -1,0 +1,36 @@
+p#notice = notice
+
+p
+  strong First name:
+  = @donor.first_name
+p
+  strong Last name:
+  = @donor.last_name
+p
+  strong Address:
+  = @donor.address
+p
+  strong Address2:
+  = @donor.address2
+p
+  strong City:
+  = @donor.city
+p
+  strong State:
+  = @donor.state
+p
+  strong Zip:
+  = @donor.zip
+p
+  strong Phone:
+  = @donor.phone
+p
+  strong Phone2:
+  = @donor.phone2
+p
+  strong Email:
+  = @donor.email
+
+=> link_to 'Edit', edit_donor_path(@donor)
+'|
+=< link_to 'Back', donors_path

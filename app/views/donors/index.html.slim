@@ -1,0 +1,39 @@
+h1 Listing donors
+
+table
+  thead
+    tr
+      th First name
+      th Last name
+      th Address
+      th Address2
+      th City
+      th State
+      th Zip
+      th Phone
+      th Phone2
+      th Email
+      th
+      th
+      th
+
+  tbody
+    - @donors.each do |donor|
+      tr
+        td = donor.first_name
+        td = donor.last_name
+        td = donor.address
+        td = donor.address2
+        td = donor.city
+        td = donor.state
+        td = donor.zip
+        td = donor.phone
+        td = donor.phone2
+        td = donor.email
+        td = link_to 'Show', donor
+        td = link_to 'Edit', edit_donor_path(donor)
+        td = link_to 'Destroy', donor, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Donor', new_donor_path
