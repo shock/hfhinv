@@ -1,0 +1,1 @@
+Devise setup instructions: https://github.com/plataformatec/devise#getting-started
