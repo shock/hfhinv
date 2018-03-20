@@ -2,8 +2,6 @@
 
 one:
   type_id: 1
-  expected: MyString
-  pickup_dropoff: false
   use_of_item_id: MyString
   original_price: 9.99
   sale_price: 9.99
@@ -13,8 +11,6 @@ one:
 
 two:
   type_id: 1
-  expected: MyString
-  pickup_dropoff: false
   use_of_item_id: MyString
   original_price: 9.99
   sale_price: 9.99
