@@ -1,0 +1,30 @@
+= form_for @pickup do |f|
+  - if @pickup.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@pickup.errors.count, "error")} prohibited this pickup from being saved:"
+      ul
+        - @pickup.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :date_of_contact
+    = f.date_select :date_of_contact
+  .field
+    = f.label :info_collected_by
+    = f.text_field :info_collected_by
+  .field
+    = f.label :pickup_date
+    = f.date_select :pickup_date
+  .field
+    = f.label :call_first
+    = f.check_box :call_first
+  .field
+    = f.label :email_receipt
+    = f.check_box :email_receipt
+  .field
+    = f.label :special_instructions
+    = f.text_area :special_instructions
+  .field
+    = f.label :donor_id
+    = f.number_field :donor_id
+  .actions = f.submit

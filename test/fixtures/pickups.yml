@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_of_contact: 2018-03-20
+  info_collected_by: MyString
+  pickup_date: 2018-03-20
+  call_first: false
+  email_receipt: false
+  special_instructions: MyText
+  donor_id: 1
+
+two:
+  date_of_contact: 2018-03-20
+  info_collected_by: MyString
+  pickup_date: 2018-03-20
+  call_first: false
+  email_receipt: false
+  special_instructions: MyText
+  donor_id: 1

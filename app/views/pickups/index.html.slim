@@ -1,0 +1,33 @@
+h1 Listing pickups
+
+table
+  thead
+    tr
+      th Date of contact
+      th Info collected by
+      th Pickup date
+      th Call first
+      th Email receipt
+      th Special instructions
+      th Donor
+      th
+      th
+      th
+
+  tbody
+    - @pickups.each do |pickup|
+      tr
+        td = pickup.date_of_contact
+        td = pickup.info_collected_by
+        td = pickup.pickup_date
+        td = pickup.call_first
+        td = pickup.email_receipt
+        td = pickup.special_instructions
+        td = pickup.donor_id
+        td = link_to 'Show', pickup
+        td = link_to 'Edit', edit_pickup_path(pickup)
+        td = link_to 'Destroy', pickup, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Pickup', new_pickup_path
