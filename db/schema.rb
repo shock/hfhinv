@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320150617) do
+ActiveRecord::Schema.define(version: 20180320161256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,12 @@ ActiveRecord::Schema.define(version: 20180320150617) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "donors", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -61,6 +67,34 @@ ActiveRecord::Schema.define(version: 20180320150617) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dropoffs", force: :cascade do |t|
+    t.date "date"
+    t.integer "donor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "item_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "department_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "item_type_id"
+    t.string "expected"
+    t.boolean "pickup_id"
+    t.integer "dropoff_id"
+    t.string "use_of_item_id"
+    t.decimal "original_price", precision: 8, scale: 2
+    t.decimal "sale_price", precision: 8, scale: 2
+    t.date "date_received"
+    t.date "date_sold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pickups", force: :cascade do |t|
     t.date "date_of_contact"
     t.string "info_collected_by"
@@ -69,6 +103,12 @@ ActiveRecord::Schema.define(version: 20180320150617) do
     t.boolean "email_receipt"
     t.text "special_instructions"
     t.integer "donor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "use_of_items", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
