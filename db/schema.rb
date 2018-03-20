@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320175934) do
+ActiveRecord::Schema.define(version: 20180320190844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 20180320175934) do
 
   create_table "items", force: :cascade do |t|
     t.integer "item_type_id"
-    t.boolean "pickup_id"
     t.string "use_of_item_id"
     t.decimal "original_price", precision: 8, scale: 2
     t.decimal "sale_price", precision: 8, scale: 2
@@ -84,16 +83,17 @@ ActiveRecord::Schema.define(version: 20180320175934) do
     t.date "date_sold"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "rejected"
-    t.string "rejection_resason"
+    t.boolean "rejected", default: false
+    t.string "rejection_reason"
+    t.integer "pickup_id"
   end
 
   create_table "pickups", force: :cascade do |t|
     t.date "date_of_contact"
     t.string "info_collected_by"
     t.date "pickup_date"
-    t.boolean "call_first"
-    t.boolean "email_receipt"
+    t.boolean "call_first", default: false
+    t.boolean "email_receipt", default: false
     t.text "special_instructions"
     t.integer "donor_id"
     t.datetime "created_at", null: false
