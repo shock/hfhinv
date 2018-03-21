@@ -47,7 +47,6 @@ gem 'activeadmin'
 
 # Executing system calls through shell
 gem 'systemu'
-gem 'stringio'
 gem 'json'
 
 group :development, :test do
