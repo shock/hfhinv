@@ -24,6 +24,42 @@ ActiveAdmin.register Pickup do
     end
   end
 
+  show do
+    attributes_table do
+      row :donor do |pickup| link_to(pickup.donor.summary_description, admin_donor_path(pickup.donor)) end
+      row :date_of_contact
+      row :info_collected_by
+      row :pickup_date
+      row :call_first
+      row :email_receipt
+      row :special_instructions
+    end
+
+    panel "Items" do
+      scope = pickup.items.order(created_at: :asc)
+      table_for scope do
+        column :item_type do |item|
+          link_to item.description, admin_item_path(item)
+        end
+        column :date_received
+        column :use_of_item
+        column :original_price
+        column :sale_price
+        column :date_sold
+        column :rejected
+        column :actions do |item|
+          output = []
+          output << link_to("Edit", edit_admin_item_path(item))
+          output << link_to('Destroy', admin_item_path(item),
+                                  method: :delete,
+                                  data: { confirm: 'Are you sure?' })
+          output.join(" ").html_safe
+        end
+      end
+    end
+
+  end
+
   form do |f|
 
     f.inputs 'Details' do

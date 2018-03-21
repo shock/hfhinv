@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320190844) do
+ActiveRecord::Schema.define(version: 20180320233737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20180320190844) do
     t.boolean "rejected", default: false
     t.string "rejection_reason"
     t.integer "pickup_id"
+    t.string "item_number"
   end
 
   create_table "pickups", force: :cascade do |t|

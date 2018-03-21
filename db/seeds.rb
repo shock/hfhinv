@@ -31,3 +31,8 @@ DEPARTMENTS.each do |name, types|
     ItemType.find_or_create_by(department_id: department.id, name: type_name)
   end
 end
+
+USES_OF_ITEMS = ["Inventory", "Recycle", "Donate", "Use In Store", "Discard"]
+USES_OF_ITEMS.each do |name|
+  UseOfItem.find_or_create_by(name: name)
+end
