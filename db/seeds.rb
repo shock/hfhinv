@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 begin
   if Rails.env.development?
-    admin_params = HashObj.new(email: 'inventory@cchfh.com', password: 'password', password_confirmation: 'password')
+    admin_params = HashObj.new(email: 'inventory@cchfh.org', password: 'password', password_confirmation: 'password')
   else
     admin_params = HashObj.new(email: 'inventory@cchfh.org', password: 'Periwinkle', password_confirmation: 'Periwinkle')
   end
