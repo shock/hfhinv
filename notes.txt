@@ -1,1 +1,10 @@
 Devise setup instructions: https://github.com/plataformatec/devise#getting-started
+
+
+TODO:
+
+* Get app running on Heroku
+* Create DNS aliases on cchfh.org domain to heroku apps
+* Use Item description on Item show page title, when available
+* Rename Pickup to Donation
+* Add flow from Donor entry, to Donation entry, to adding multiple Items for a donation
