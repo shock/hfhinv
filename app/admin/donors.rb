@@ -1,5 +1,8 @@
 ActiveAdmin.register Donor do
+
   actions :all, :except => [:destroy] if Rails.env.production?
+  config.batch_actions = false if Rails.env.production?
+  config.sort_order = 'last_name_asc'
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -15,17 +18,28 @@ ActiveAdmin.register Donor do
   #   permitted
   # end
 
+  controller do
+    def find_resource
+      donor = scoped_collection.find(params[:id])
+      donor.phone = donor.formatted_phone
+      donor.phone2 = donor.formatted_phone2
+      donor
+    end
+  end
+
+
+
   index do
     selectable_column
     id_column
 
-    column :first_name
-    column :last_name
+    column :first do |donor| link_to "#{donor.first_name}", admin_donor_path(donor) end
+    column :last_name do |donor| link_to "#{donor.last_name}", admin_donor_path(donor) end
     column :full_address
     column :city
     column :zip
-    column :phone
-    column :phone2
+    column :phone do |donor| format_phone_number(donor.phone) rescue nil end
+    column :phone2 do |donor| format_phone_number(donor.phone2) rescue nil end
     actions
   end
 
@@ -39,7 +53,37 @@ ActiveAdmin.register Donor do
       row :email
     end
 
-
+    panel "Donations (Pickups)" do
+      scope = donor.donations.order(pickup_date: :desc)
+      table_for scope do
+        column :date_of_contact
+        column :info_collected_by
+        column :pickup_date
+        column :call_first
+        column :email_receipt
+        column :special_instructions
+        column :actions do |donation|
+          output = []
+          output << link_to("Edit", edit_admin_donation_path(donation))
+          output << link_to('Destroy', admin_donation_path(donation),
+                                  method: :delete,
+                                  data: { confirm: 'Are you sure?' })
+          output.join(" ").html_safe
+        end
+      end
+      div class: 'action_items' do
+        span class: 'action_item' do
+          link_to "Create new Donation/Pickup", new_admin_donation_path(donor:{donor_id: donor.id}),
+            class: 'default_button'
+        end
+      end
+    end
   end
+
+  filter :first_name
+  filter :last_name
+  filter :email
+  filter :phone
+  filter :phone2
 
 end

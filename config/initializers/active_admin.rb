@@ -294,4 +294,5 @@ end
 
 module ActiveAdmin::ViewHelpers
   include ActiveAdminHelper
+  include FormattingHelper
 end
