@@ -3,7 +3,7 @@
 one:
   date_of_contact: 2018-03-20
   info_collected_by: MyString
-  donation_date: 2018-03-20
+  pickup_date: 2018-03-20
   call_first: false
   email_receipt: false
   special_instructions: MyText
@@ -12,7 +12,7 @@ one:
 two:
   date_of_contact: 2018-03-20
   info_collected_by: MyString
-  donation_date: 2018-03-20
+  pickup_date: 2018-03-20
   call_first: false
   email_receipt: false
   special_instructions: MyText

@@ -3,7 +3,7 @@ ActiveAdmin.register Donation do
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
 
-  permit_params :date_of_contact, :info_collected_by, :donation_date, :call_first, :email_receipt, :special_instructions, :donor_id
+  permit_params :date_of_contact, :info_collected_by, :pickup_date, :call_first, :email_receipt, :special_instructions, :donor_id
 
   #
   # or
@@ -18,9 +18,9 @@ ActiveAdmin.register Donation do
 
   controller do
     def new_donation_defaults
-      @donation = Pickup.new
+      @donation = Donation.new
       @donation.date_of_contact = Date.today
-      @donation.donation_date = Date.today
+      @donation.pickup_date = Date.today
     end
   end
 
@@ -29,7 +29,7 @@ ActiveAdmin.register Donation do
       row :donor do |donation| link_to(donation.donor.summary_description, admin_donor_path(donation.donor)) end
       row :date_of_contact
       row :info_collected_by
-      row :donation_date
+      row :pickup_date
       row :call_first
       row :email_receipt
       row :special_instructions
@@ -67,7 +67,7 @@ ActiveAdmin.register Donation do
       # f.select :donor, collection: Donor.all
       f.input :date_of_contact
       f.input :info_collected_by
-      f.input :donation_date
+      f.input :pickup_date
       f.input :call_first
       f.input :email_receipt
       f.input :special_instructions

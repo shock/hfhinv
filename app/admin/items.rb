@@ -44,7 +44,7 @@ ActiveAdmin.register Item do
 
     panel "Actions" do
       output = []
-      output << link_to("Add Another Item to this Pickup", "#")
+      output << link_to("Add Another Item to this Donation", "#")
       output.join(" ").html_safe
     end
     active_admin_comments
@@ -54,7 +54,7 @@ ActiveAdmin.register Item do
   form do |f|
 
     f.inputs 'Details' do
-      f.input :donation, collection: options_for_select(Pickup.all.map{|p| ["#{p.description}", p.id]}, item.donation_id)
+      f.input :donation, collection: options_for_select(Donation.all.map{|d| ["#{d.description}", d.id]}, item.donation_id)
       item_type_descriptions = []
       Department.all.order(name: :asc).each do |department|
         department.item_types.map do |item_type|
