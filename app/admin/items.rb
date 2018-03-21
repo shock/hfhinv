@@ -13,6 +13,21 @@ ActiveAdmin.register Item do
   #   permitted
   # end
 
+  index do
+    selectable_column
+    id_column
+    column :item_type do |item| item.description end
+    column :use_of_item
+    column :original_price
+    column :sale_price
+    column :date_received
+    column :rejected
+    column :pickup do |item| item.pickup.description end
+    column :inventory_number
+    actions
+  end
+
+
   show do
     attributes_table do
       row :item_type do |item| item.description end

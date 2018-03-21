@@ -9,9 +9,13 @@ class Item < ApplicationRecord
   before_save :check_update_inventory_number
 
   def check_update_inventory_number
-    if item_type.present? && inventory_number.blank? && date_received.present?
-      if use_of_item_id_changed? && use_of_item.name == "Inventory"
-        self.inventory_number = inventory_number_generator
+    if use_of_item_id_changed?
+      if item_type.present? && date_received.present?
+        if use_of_item.name == "Inventory"
+          self.inventory_number = inventory_number_generator
+        else
+          self.inventory_number = nil
+        end
       end
     end
   end
@@ -19,7 +23,9 @@ class Item < ApplicationRecord
 
   def inventory_number_generator
     type_count = Item.where(item_type_id: item_type_id).where(date_received: date_received).count
-    type_count += 1
+    unless Item.find_by_id(self.id)
+      type_count +=1
+    end
     date_string = date_received.strftime("%m%d%Y")
     "#{date_string}-#{item_type.name}#{type_count}"
   end
