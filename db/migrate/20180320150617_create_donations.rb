@@ -1,6 +1,6 @@
-class CreatePickups < ActiveRecord::Migration[5.1]
+class CreateDonationss < ActiveRecord::Migration[5.1]
   def change
-    create_table :pickups do |t|
+    create_table :donations do |t|
       t.date :date_of_contact
       t.string :info_collected_by
       t.date :pickup_date

@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-class PickupsTest < ApplicationSystemTestCase
+class DonationsTest < ApplicationSystemTestCase
   # test "visiting the index" do
-  #   visit pickups_url
+  #   visit donations_url
   #
   #   assert_selector "h1", text: "Pickup"
   # end

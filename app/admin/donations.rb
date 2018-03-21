@@ -1,9 +1,9 @@
-ActiveAdmin.register Pickup do
+ActiveAdmin.register Donation do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
 
-  permit_params :date_of_contact, :info_collected_by, :pickup_date, :call_first, :email_receipt, :special_instructions, :donor_id
+  permit_params :date_of_contact, :info_collected_by, :donation_date, :call_first, :email_receipt, :special_instructions, :donor_id
 
   #
   # or
@@ -14,29 +14,29 @@ ActiveAdmin.register Pickup do
   #   permitted
   # end
 
-  before_action :new_pickup_defaults, only: [:new]
+  before_action :new_donation_defaults, only: [:new]
 
   controller do
-    def new_pickup_defaults
-      @pickup = Pickup.new
-      @pickup.date_of_contact = Date.today
-      @pickup.pickup_date = Date.today
+    def new_donation_defaults
+      @donation = Pickup.new
+      @donation.date_of_contact = Date.today
+      @donation.donation_date = Date.today
     end
   end
 
   show do
     attributes_table do
-      row :donor do |pickup| link_to(pickup.donor.summary_description, admin_donor_path(pickup.donor)) end
+      row :donor do |donation| link_to(donation.donor.summary_description, admin_donor_path(donation.donor)) end
       row :date_of_contact
       row :info_collected_by
-      row :pickup_date
+      row :donation_date
       row :call_first
       row :email_receipt
       row :special_instructions
     end
 
     panel "Items" do
-      scope = pickup.items.order(created_at: :asc)
+      scope = donation.items.order(created_at: :asc)
       table_for scope do
         column :item_type do |item|
           link_to item.description, admin_item_path(item)
@@ -67,7 +67,7 @@ ActiveAdmin.register Pickup do
       # f.select :donor, collection: Donor.all
       f.input :date_of_contact
       f.input :info_collected_by
-      f.input :pickup_date
+      f.input :donation_date
       f.input :call_first
       f.input :email_receipt
       f.input :special_instructions

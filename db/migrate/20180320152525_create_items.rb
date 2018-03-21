@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration[5.1]
     create_table :items do |t|
       t.integer :item_type_id
       t.string :expected
-      t.boolean :pickup_id
+      t.boolean :donation_id
       t.integer :dropoff_id
       t.string :use_of_item_id
       t.decimal :original_price, :precision => 8, :scale => 2

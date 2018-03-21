@@ -2,7 +2,7 @@ ActiveAdmin.register Item do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :item_type_id, :expected, :pickup_id, :use_of_item_id, :original_price,
+  permit_params :item_type_id, :expected, :donation_id, :use_of_item_id, :original_price,
     :sale_price, :date_received, :date_sold, :rejected, :rejection_reason, :item_number
   #
   # or
@@ -22,7 +22,7 @@ ActiveAdmin.register Item do
     column :sale_price
     column :date_received
     column :rejected
-    column :pickup do |item| item.pickup.description end
+    column :donation do |item| item.donation.description end
     column :inventory_number
     actions
   end
@@ -31,7 +31,7 @@ ActiveAdmin.register Item do
   show do
     attributes_table do
       row :item_type do |item| item.description end
-      row :pickup do |item| item.pickup.description end
+      row :donation do |item| item.donation.description end
       row :date_received
       row :use_of_item do |item| item.use_of_item.name rescue nil end
       row :inventory_number
@@ -54,7 +54,7 @@ ActiveAdmin.register Item do
   form do |f|
 
     f.inputs 'Details' do
-      f.input :pickup, collection: options_for_select(Pickup.all.map{|p| ["#{p.description}", p.id]}, item.pickup_id)
+      f.input :donation, collection: options_for_select(Pickup.all.map{|p| ["#{p.description}", p.id]}, item.donation_id)
       item_type_descriptions = []
       Department.all.order(name: :asc).each do |department|
         department.item_types.map do |item_type|
