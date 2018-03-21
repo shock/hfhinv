@@ -5,7 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development? rescue nil
+begin
+  if Rails.env.development?
+    admin_params = HashObj.new(email: 'inventory@cchfh.com', password: 'password', password_confirmation: 'password')
+  else
+    admin_params = HashObj.new(email: 'inventory@cchfh.org', password: 'Periwinkle', password_confirmation: 'Periwinkle')
+  end
+  AdminUser.create!(admin_params)
+rescue ActiveRecord::RecordInvalid
+  puts "Admin user with email #{admin_params.email} already exists, skipping..."
+end
+
 DEPARTMENTS = {
   "Appliances" => ["Washer or Dryer", "Refrigerator", "Freezer", "Range/Oven/Cooktop", "Microwave"],
   "Furniture" => ["Bed/Frame", "Sofa", "Chair", "Dining Table", "Dresser", "End/Coffee Table", "Desk/Office",
