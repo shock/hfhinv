@@ -19,7 +19,7 @@ ActiveAdmin.register Item do
       row :pickup do |item| item.pickup.description end
       row :date_received
       row :use_of_item do |item| item.use_of_item.name rescue nil end
-      row :item_number
+      row :inventory_number
       row :original_price
       row :sale_price
       row :date_sold
@@ -50,7 +50,7 @@ ActiveAdmin.register Item do
       f.input :item_type, collection: options_for_select(item_type_descriptions, item.item_type_id)
       f.input :date_received, as: :date_picker
       f.input :use_of_item
-      f.input :item_number
+      f.input :inventory_number
       f.input :original_price
       f.input :sale_price
       f.input :date_sold, as: :date_picker
