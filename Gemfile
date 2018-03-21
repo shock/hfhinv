@@ -45,6 +45,11 @@ gem 'devise'
 # Active Admin
 gem 'activeadmin'
 
+# Executing system calls through shell
+gem 'systemu'
+gem 'stringio'
+gem 'json'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
