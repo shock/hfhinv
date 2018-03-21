@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Date of contact:
+  = @donation.date_of_contact
+p
+  strong Info collected by:
+  = @donation.info_collected_by
+p
+  strong Pickup date:
+  = @donation.donation_date
+p
+  strong Call first:
+  = @donation.call_first
+p
+  strong Email receipt:
+  = @donation.email_receipt
+p
+  strong Special instructions:
+  = @donation.special_instructions
+p
+  strong Donor:
+  = @donation.donor_id
+
+=> link_to 'Edit', edit_donation_path(@donation)
+'|
+=< link_to 'Back', donations_path

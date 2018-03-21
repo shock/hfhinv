@@ -1,9 +1,9 @@
-= form_for @pickup do |f|
-  - if @pickup.errors.any?
+= form_for @donation do |f|
+  - if @donation.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@pickup.errors.count, "error")} prohibited this pickup from being saved:"
+      h2 = "#{pluralize(@donation.errors.count, "error")} prohibited this donation from being saved:"
       ul
-        - @pickup.errors.full_messages.each do |message|
+        - @donation.errors.full_messages.each do |message|
           li = message
 
   .field
@@ -13,8 +13,8 @@
     = f.label :info_collected_by
     = f.text_field :info_collected_by
   .field
-    = f.label :pickup_date
-    = f.date_select :pickup_date
+    = f.label :donation_date
+    = f.date_select :donation_date
   .field
     = f.label :call_first
     = f.check_box :call_first

@@ -1,0 +1,33 @@
+h1 Listing donations
+
+table
+  thead
+    tr
+      th Date of contact
+      th Info collected by
+      th Pickup date
+      th Call first
+      th Email receipt
+      th Special instructions
+      th Donor
+      th
+      th
+      th
+
+  tbody
+    - @donations.each do |donation|
+      tr
+        td = donation.date_of_contact
+        td = donation.info_collected_by
+        td = donation.donation_date
+        td = donation.call_first
+        td = donation.email_receipt
+        td = donation.special_instructions
+        td = donation.donor_id
+        td = link_to 'Show', donation
+        td = link_to 'Edit', edit_donation_path(donation)
+        td = link_to 'Destroy', donation, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Pickup', new_donation_path
