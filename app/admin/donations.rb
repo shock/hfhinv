@@ -24,6 +24,15 @@ ActiveAdmin.register Donation do
     end
   end
 
+  index do
+    selectable_column
+    id_column
+    column :donor
+    column :pickup
+    column :pickup_date
+    column :info_collected_by
+  end
+
   show do
     attributes_table do
       row :donor do |donation| link_to(donation.donor.summary_description, admin_donor_path(donation.donor)) end
@@ -67,6 +76,7 @@ ActiveAdmin.register Donation do
       # f.select :donor, collection: Donor.all
       f.input :date_of_contact
       f.input :info_collected_by
+      f.input :pickup
       f.input :pickup_date
       f.input :call_first
       f.input :email_receipt
