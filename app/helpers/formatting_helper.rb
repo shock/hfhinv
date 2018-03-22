@@ -9,4 +9,12 @@ module FormattingHelper
     end
     "(#{digits.slice(0,3)})-#{digits.slice(3,3)}-#{digits.slice(6,4)}"
   end
+
+  def normal_date(date)
+    date.strftime("%b %e, %Y")
+  end
+
+  def dotw(date)
+    Date::DAYNAMES[date.wday].slice(0,3).upcase
+  end
 end

@@ -33,7 +33,7 @@ ActiveAdmin.setup do |config|
   #   config.default_namespace = false
   #
   # Default:
-  # config.default_namespace = :admin
+  config.default_namespace = :admin
   #
   # You can customize the settings for each namespace by using
   # a namespace block. For example, to change the site title
@@ -126,13 +126,13 @@ ActiveAdmin.setup do |config|
   #
   # You can change the order for the comments and you can change the column
   # to be used for ordering:
-  # config.comments_order = 'created_at ASC'
+  config.comments_order = 'created_at ASC'
   #
   # You can disable the menu item for the comments index page:
-  # config.comments_menu = false
+  config.comments_menu = false
   #
   # You can customize the comment menu:
-  # config.comments_menu = { parent: 'Admin', priority: 1 }
+  config.comments_menu = { parent: 'Admin', priority: 1 }
 
   # == Batch Actions
   #

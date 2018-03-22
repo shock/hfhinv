@@ -1,6 +1,7 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
   config.batch_actions = false if Rails.env.production?
+  menu parent: 'Admin'
 
   index do
     selectable_column

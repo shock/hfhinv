@@ -1,5 +1,5 @@
 ActiveAdmin.register Department do
-  menu parent: 'Item Types'
+  menu parent: 'Admin'
   config.batch_actions = false if Rails.env.production?
 
   # See permitted parameters documentation:

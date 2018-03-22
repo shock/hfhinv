@@ -56,14 +56,14 @@ ActiveAdmin.register Donor do
     panel "Donations (Pickups)" do
       scope = donor.donations.order(pickup_date: :desc)
       table_for scope do
-        column :date_of_contact
-        column :info_collected_by
+        column :date_of_contact do |donation| link_to(normal_date(donation.date_of_contact), admin_donation_path(donation)); end
+        # column :info_collected_by
+        column :pickup
         column :pickup_date
-        column :call_first
-        column :email_receipt
-        column :special_instructions
+        column :day do |donation| dotw(donation.pickup_date); end
         column :actions do |donation|
           output = []
+          output << link_to("View", admin_donation_path(donation))
           output << link_to("Edit", edit_admin_donation_path(donation))
           output << link_to('Destroy', admin_donation_path(donation),
                                   method: :delete,
