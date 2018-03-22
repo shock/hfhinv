@@ -62,7 +62,7 @@ ActiveAdmin.register Donation do
         end
         column :date_received
         column :use_of_item
-        column :set_price
+        column :regular_price
         column :sale_price
         column :date_sold
         column :rejected

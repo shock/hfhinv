@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   #  ==================
   validates :rejection_reason, presence: { message: 'Required when rejected' }, if: :rejected
   validates :description, presence: { message: 'Required for inventory' }, if: :inventoried
-  validates :set_price, presence: { message: 'Required for inventory' }, if: :inventoried
+  validates :regular_price, presence: { message: 'Required for inventory' }, if: :inventoried
 
   #  ================
   #  = AR Callbacks  =

@@ -3,7 +3,7 @@
 one:
   type_id: 1
   use_of_item_id: MyString
-  set_price: 9.99
+  regular_price: 9.99
   sale_price: 9.99
   date_received: 2018-03-20
   date_of_sale: 2018-03-20
@@ -12,7 +12,7 @@ one:
 two:
   type_id: 1
   use_of_item_id: MyString
-  set_price: 9.99
+  regular_price: 9.99
   sale_price: 9.99
   date_received: 2018-03-20
   date_of_sale: 2018-03-20
