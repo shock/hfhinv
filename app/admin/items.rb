@@ -18,7 +18,7 @@ ActiveAdmin.register Item do
   index do
     selectable_column
     id_column
-    column :item_type do |item| item.description end
+    column :item_type do |item| item.summary_description end
     column :use_of_item do |item|
       item.use_of_item.name rescue nil
     end
@@ -34,7 +34,8 @@ ActiveAdmin.register Item do
 
   show do
     attributes_table do
-      row :item_type do |item| item.description end
+      row :item_type do |item| item.summary_description end
+      row :description
       row :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)) end
       row :date_received
       row :use_of_item do |item| item.use_of_item.name rescue nil end
@@ -67,6 +68,7 @@ ActiveAdmin.register Item do
       end
 
       f.input :item_type, collection: options_for_select(item_type_descriptions, item.item_type_id)
+      f.input :description
       f.input :date_received, as: :date_picker
       f.input :use_of_item
       f.input :inventory_number

@@ -58,7 +58,7 @@ ActiveAdmin.register Donation do
       scope = donation.items.order(created_at: :asc)
       table_for scope do
         column :item_type do |item|
-          link_to item.description, admin_item_path(item)
+          link_to item.summary_description, admin_item_path(item)
         end
         column :date_received
         column :use_of_item
