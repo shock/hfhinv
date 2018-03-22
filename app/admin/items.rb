@@ -4,7 +4,7 @@ ActiveAdmin.register Item do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :item_type_id, :expected, :donation_id, :use_of_item_id, :original_price,
+  permit_params :item_type_id, :expected, :donation_id, :use_of_item_id, :set_price,
     :sale_price, :date_received, :date_sold, :rejected, :rejection_reason, :item_number
   #
   # or
@@ -19,12 +19,14 @@ ActiveAdmin.register Item do
     selectable_column
     id_column
     column :item_type do |item| item.description end
-    column :use_of_item
-    column :original_price
-    column :sale_price
+    column :use_of_item do |item|
+      item.use_of_item.name rescue nil
+    end
+    column :set_price
+    # column :sale_price
     column :date_received
     column :rejected
-    column :donation do |item| item.donation.description end
+    column :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)); end
     column :inventory_number
     actions
   end
@@ -37,7 +39,7 @@ ActiveAdmin.register Item do
       row :date_received
       row :use_of_item do |item| item.use_of_item.name rescue nil end
       row :inventory_number
-      row :original_price
+      row :set_price
       row :sale_price
       row :date_sold
       row :rejected
@@ -68,7 +70,7 @@ ActiveAdmin.register Item do
       f.input :date_received, as: :date_picker
       f.input :use_of_item
       f.input :inventory_number
-      f.input :original_price
+      f.input :set_price
       f.input :sale_price
       f.input :date_sold, as: :date_picker
       f.input :rejected
