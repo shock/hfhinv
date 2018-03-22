@@ -15,4 +15,24 @@ ActiveAdmin.register ItemType do
   #   permitted
   # end
 
+  before_action :new_item_type_defaults, only: [:new]
+
+  controller do
+    def new_item_type_defaults
+      @item_type = ItemType.new
+      if params[:item_type] && (department_id = params[:item_type][:department_id])
+        @item_type.department_id = department_id
+      end
+    end
+  end
+
+
+
+  show do
+    attributes_table do
+      row :name
+      row :department do |item_type| item_type.department.name end
+    end
+  end
+
 end

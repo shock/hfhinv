@@ -73,7 +73,7 @@ ActiveAdmin.register Donor do
       end
       div class: 'action_items' do
         span class: 'action_item' do
-          link_to "Create new Donation/Pickup", new_admin_donation_path(donor:{donor_id: donor.id}),
+          link_to "Create new Donation/Pickup", new_admin_donation_path(donation:{donor_id: donor.id}),
             class: 'default_button'
         end
       end

@@ -21,10 +21,8 @@ ActiveAdmin.register Donation do
 
   controller do
     def new_donation_defaults
-      puts params.inspect
       @donation = Donation.new
-      # byebug
-      if params[:donor] && (donor_id = params[:donor][:donor_id])
+      if params[:donation] && (donor_id = params[:donation][:donor_id])
         @donation.donor_id = donor_id
       end
       @donation.date_of_contact = Date.today
