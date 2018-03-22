@@ -1,6 +1,7 @@
 ActiveAdmin.register Donation do
   actions :all, :except => [:destroy] if Rails.env.production?
   config.batch_actions = false if Rails.env.production?
+  menu priority: 11
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
