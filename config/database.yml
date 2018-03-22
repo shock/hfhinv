@@ -22,3 +22,4 @@ production:
   <<: *default
   database: hfhinv_production
   username: hfhinv
+  password: Periwinkle
