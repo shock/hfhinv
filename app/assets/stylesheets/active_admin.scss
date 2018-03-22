@@ -33,3 +33,16 @@ form input[type=date] {
   width: calc(100% - 30px);
   height: 5em;
 }
+
+#header {
+  position: relative;
+  h1 {
+    margin: 0;
+    padding: 0 10px 0 0;
+    img {
+      position: relative;
+      top: 3px;
+      height: 27px;
+    }
+  }
+}
