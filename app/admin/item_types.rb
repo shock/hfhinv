@@ -26,6 +26,20 @@ ActiveAdmin.register ItemType do
     end
   end
 
+  index do
+    selectable_column
+    column :name do |item_type| link_to(item_type.name, admin_item_type_path(item_type)); end
+    column :code
+    column :notes
+    actions defaults: false do |item_type|
+      output = []
+      output << link_to("View", admin_item_type_path(item_type))
+      output << link_to("Edit", edit_admin_item_type_path(item_type))
+      output << link_to("Delete", admin_item_type_path(item_type), method: :delete,
+        data: {confirm: "Are you absolutely sure you want to delete #{item_type.name}? If any items exist with this item type, you will corrupt the database!!"})
+      output.join(' ').html_safe
+    end
+  end
 
 
   show do

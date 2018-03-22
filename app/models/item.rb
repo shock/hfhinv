@@ -11,8 +11,10 @@ class Item < ApplicationRecord
   #  = AR Validations =
   #  ==================
   validates :rejection_reason, presence: { message: 'Required when rejected' }, if: :rejected
-  validates :description, presence: { message: 'Required for inventory' }, if: :inventoried
-  validates :regular_price, presence: { message: 'Required for inventory' }, if: :inventoried
+  validates :description, presence: { message: 'Required for inventoried items' }, if: :inventoried
+  validates :regular_price, presence: { message: 'Required for inventoried items' }, if: :inventoried
+  validates :date_received, presence: { message: 'Required for inventoried items' }, if: :inventoried
+  validates :rejection_reason, absence: { message: "You must mark the item as rejected before filling this field" }, unless: :rejected
 
   #  ================
   #  = AR Callbacks  =
@@ -45,7 +47,7 @@ class Item < ApplicationRecord
   alias :inventoried? :inventoried
 
   def received
-    use_of_item.date_received.present?
+    self.date_received.present?
   end
   alias :received? :received
 
@@ -57,7 +59,7 @@ private
       type_count +=1
     end
     date_string = date_received.strftime("%m%d%Y")
-    "#{date_string}-#{item_type.name}#{type_count}"
+    "#{date_string}-#{item_type.code}#{type_count}"
   end
 
 end

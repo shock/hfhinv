@@ -18,8 +18,15 @@ ActiveAdmin.register Department do
 
   index do
     selectable_column
-    column :name
-    actions
+    column :name do |department| link_to(department.name, admin_department_path(department)); end
+    actions defaults: false do |department|
+      output = []
+      output << link_to("View", admin_department_path(department))
+      output << link_to("Edit", edit_admin_department_path(department))
+      output << link_to("Delete", admin_department_path(department), method: :delete,
+        data: {confirm: "Are you absolutely sure you want to delete #{department.name}? If any items exist in this department, you will corrupt the database!!"})
+      output.join(' ').html_safe
+    end
   end
 
   show do
@@ -27,6 +34,8 @@ ActiveAdmin.register Department do
       scope = department.item_types.order(name: :asc)
       table_for scope do
         column :name
+        column :code
+        column :notes
       end
       div class: 'action_items' do
         span class: 'action_item' do

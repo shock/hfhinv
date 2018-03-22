@@ -6,7 +6,7 @@ ActiveAdmin.register Item do
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   permit_params :item_type_id, :expected, :donation_id, :use_of_item_id, :regular_price,
-    :sale_price, :date_received, :date_sold, :rejected, :rejection_reason, :item_number
+    :sale_price, :date_received, :date_sold, :rejected, :rejection_reason, :item_number, :description
   #
   # or
   #
@@ -72,11 +72,9 @@ ActiveAdmin.register Item do
       f.input :description
       f.input :date_received, as: :date_picker
       f.input :use_of_item
-      f.input :inventory_number
       f.input :regular_price
-      f.input :sale_price
       f.input :date_sold, as: :date_picker
-      f.input :rejected
+      f.input :rejected, label: 'Rejected at Pickup'
       f.input :rejection_reason
     end
     f.actions
