@@ -77,7 +77,7 @@ ActiveAdmin.register Donation do
       end
       div class: 'action_items' do
         span class: 'action_item' do
-          link_to "Add New Item", new_admin_item_path(item:{donation_id: donation.id}), class: 'default_button'
+          link_to "Add Item", new_admin_item_path(item:{donation_id: donation.id}), class: 'default_button'
         end
       end
 
@@ -97,8 +97,8 @@ ActiveAdmin.register Donation do
       f.input :call_first
       f.input :email_receipt
       f.input :special_instructions
-      f.actions
     end
+    f.actions
 
   end
 

@@ -33,7 +33,7 @@ ActiveAdmin.register Item do
   show do
     attributes_table do
       row :item_type do |item| item.description end
-      row :donation do |item| item.donation.description end
+      row :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)) end
       row :date_received
       row :use_of_item do |item| item.use_of_item.name rescue nil end
       row :inventory_number
@@ -46,7 +46,7 @@ ActiveAdmin.register Item do
 
     panel "Actions" do
       output = []
-      output << link_to("Add Another Item to this Donation", "#")
+      output << link_to("Add Another Item to this Donation", new_admin_item_path(item:{donation_id: item.donation.id}), class: 'default_button')
       output.join(" ").html_safe
     end
     active_admin_comments
@@ -74,7 +74,7 @@ ActiveAdmin.register Item do
       f.input :rejected
       f.input :rejection_reason
     end
-    f.actions :submit, :cancel
+    f.actions
 
   end
 
