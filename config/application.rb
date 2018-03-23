@@ -17,5 +17,6 @@ module Hfhinv
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/lib)
+    config.time_zone = "Central Time (US & Canada)"
   end
 end
