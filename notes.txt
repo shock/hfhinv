@@ -3,11 +3,16 @@ Devise setup instructions: https://github.com/plataformatec/devise#getting-start
 
 TODO:
 
-* Get app running on Heroku
-* Deploy to Heroku (https://hfhinv.herokuapp.com/admin), works
+- Deploy to Heroku (https://hfhinv.herokuapp.com/admin), works
 * Use Item description on Item show page title, when available
 * Add flow from Donor entry, to Donation entry, to adding multiple Items for a donation
 * Update Donations show Title to something more descriptive
     https://github.com/activeadmin/activeadmin/issues/184
 * Try to get better date-time picker for pickup dates
     https://github.com/activeadmin/activeadmin/wiki/combine-datetime-picker-with-activeadmin
+* Scope items by ItemType and Department
+* Don't let admin delete Departments or ItemTypes if they have associated items
+* Create function to export Inventory Items for import into QuickBooks
+* Create function to import QuickBooks inventory and update date_sold, and sale_price
+* Set place-holder text for item description based on ItemType notes selected
+
