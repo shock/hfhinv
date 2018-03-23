@@ -64,6 +64,16 @@ class Item < ApplicationRecord
   end
   alias :sold? :sold
 
+  def use_of_item_name
+    "#{use_of_item.name}"
+  end
+
+  #  ========================================
+  #  = aliases for default instance methods =
+  #  ========================================
+  def price
+    regular_price
+  end
 
 private
   def inventory_number_generator

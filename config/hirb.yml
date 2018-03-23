@@ -1,0 +1,77 @@
+:output:
+  Audit: &audit
+    :options:
+      :fields:
+        - id
+        - auditable_id
+        - auditable_type
+        - user_id
+        - user_type
+        - user_name
+        - action
+        - audited_changes
+        - version
+        - created
+        - remote_address
+  ArchivedAudit:
+    <<: *audit
+  "Audited::Adapters::ActiveRecord::Audit":
+    <<: *audit
+  AdminUser:
+    :options:
+      :fields:
+        - id
+        - email
+        - last_sign_in_at
+        - created
+        - updated
+  Department:
+    :options:
+      :fields:
+        - id
+        - name
+        - created
+        - updated
+  Donation:
+    :options:
+      :fields:
+        - id
+        - date_of_contact
+        - pickup_date
+        - p
+        - d_id
+        - created
+        - updated
+  Donor:
+    :options:
+      :fields:
+        - id
+        - first_name
+        - last_name
+        - phone
+        - city
+        - zip
+        - created
+        - updated
+  ItemType:
+    :options:
+      :fields:
+        - id
+        - name
+        - code
+        - created
+        - updated
+  Item:
+    :options:
+      :fields:
+        - id
+        - item_type_desc
+        - price
+        - date_received
+        - date_sold
+        - r
+        - d_id
+        - inventory_number
+        - use
+        - created
+        - updated

@@ -17,3 +17,5 @@ TODO:
 * Set place-holder text for item description based on ItemType notes selected
 * when listing items for a donation that has been picked_up, highlight items that have not be marked as received
 * Export a Pickup Manifest for a given date, perhaps as HTML, then print from browser
+* get zipcode -> weekday mappings from Zakk or Mike and validate donation pickup_dates
+* Find out if we can conigure QuickBooks to export sales data with items ID, item#, sale price, and sale date

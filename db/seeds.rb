@@ -220,4 +220,8 @@ USES_OF_ITEMS.each do |name|
   UseOfItem.find_or_create_by(name: name)
 end
 
+puts "Creating Anonymous Donor"
+params = {first_name: "Anonymous", last_name: "Donor", city: "Norman", state: "OK", zip: "73069", phone: "555-555-5555"}
+Donor.find_or_create_by(params)
+
 puts "Database seeding successful"

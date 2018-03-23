@@ -6,7 +6,8 @@ ActiveAdmin.register Donation do
   scope :today
   scope :future
   scope :past
-  scope :picked_up
+  scope :pickups
+  scope :received
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

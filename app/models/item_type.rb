@@ -17,4 +17,5 @@ class ItemType < ApplicationRecord
   def description
     "#{department.name} - #{name}"
   end
+
 end

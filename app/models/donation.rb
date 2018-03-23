@@ -20,12 +20,16 @@ class Donation < ApplicationRecord
   scope :past, -> { where("pickup_date < ?", Date.today) }
   scope :today, -> { where("pickup_date = ?", Date.today) }
   scope :future, -> { where("pickup_date > ?", Date.today) }
-  scope :picked_up, -> { joins(:items).where.not(items: {date_received: nil})}
-
+  scope :pickups, -> { where(pickup: true) }
+  scope :received, -> { joins(:items).where.not(items: {date_received: nil})}
+  scope :pickups_received, -> { pickups.received }
+  scope :include_donor_and_items, -> { includes([:donor, {items: {item_type: :department}}]) }
+  scope :ordered_by_zip, -> { joins(:donor).merge(Donor.order(zip: :asc)) }
   #  ====================
   #  = Instance Methods =
   #  ====================
   def description
     "#{donor.full_name} - #{pickup_date}"
   end
+
 end
