@@ -21,6 +21,15 @@ a.default_button, .default_button {
   text-decoration: none;
 }
 
+div.table_actions, td.col-actions {
+  a.member_link, a {
+    @include default-button;
+    font-size: 0.9em;
+    line-height: 7px;
+    padding: 4px 7px 4px;
+  }
+}
+
 td.col.col-phone {
   width: 80px;
 }

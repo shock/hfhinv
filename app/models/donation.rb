@@ -14,6 +14,13 @@ class Donation < ApplicationRecord
   validates :date_of_contact, presence: true
   validates :pickup_date, presence: { message: 'Required for pickups' }, if: :pickup
 
+  #  =============
+  #  = AR Scopes =
+  #  =============
+  scope :past, -> { where("pickup_date < ?", Date.today) }
+  scope :today, -> { where("pickup_date = ?", Date.today) }
+  scope :future, -> { where("pickup_date > ?", Date.today) }
+  scope :picked_up, -> { joins(:items).where.not(items: {date_received: nil})}
 
   #  ====================
   #  = Instance Methods =

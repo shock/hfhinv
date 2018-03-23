@@ -14,7 +14,15 @@ class Item < ApplicationRecord
   validates :description, presence: { message: 'Required for inventoried items' }, if: :inventoried
   validates :regular_price, presence: { message: 'Required for inventoried items' }, if: :inventoried
   validates :date_received, presence: { message: 'Required for inventoried items' }, if: :inventoried
+  validates :sale_price, presence: { message: 'Required for sold items' }, if: :sold
   validates :rejection_reason, absence: { message: "You must mark the item as rejected before filling this field" }, unless: :rejected
+
+  #  =============
+  #  = AR Scopes =
+  #  =============
+  scope :inventoried, -> { where("use_of_item_id = ?", UseOfItem.find_by_name("Inventory").id) }
+  scope :in_stock, -> { inventoried.where(date_sold: nil) }
+  scope :sold, -> { inventoried.where.not(date_sold: nil) }
 
   #  ================
   #  = AR Callbacks  =
@@ -51,15 +59,19 @@ class Item < ApplicationRecord
   end
   alias :received? :received
 
+  def sold
+    self.inventoried && date_sold.present?
+  end
+  alias :sold? :sold
+
 
 private
   def inventory_number_generator
-    type_count = Item.where(item_type_id: item_type_id).where(date_received: date_received).count
-    unless Item.find_by_id(self.id)
-      type_count +=1
-    end
+    same_day_items = Item.where(item_type_id: item_type_id).where(date_received: date_received).to_a
+    same_day_items.delete(self)
+    item_type_day_count = same_day_items.length + 1
     date_string = date_received.strftime("%m%d%Y")
-    "#{date_string}-#{item_type.code}#{type_count}"
+    "#{date_string}-#{item_type.code}#{item_type_day_count}"
   end
 
 end

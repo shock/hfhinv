@@ -15,4 +15,4 @@ TODO:
 * Create function to export Inventory Items for import into QuickBooks
 * Create function to import QuickBooks inventory and update date_sold, and sale_price
 * Set place-holder text for item description based on ItemType notes selected
-
+* when listing items for a donation that has been picked_up, highlight items that have not be marked as received

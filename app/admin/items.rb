@@ -1,6 +1,9 @@
 ActiveAdmin.register Item do
   config.batch_actions = false if Rails.env.production?
   menu priority: 12
+  scope :inventoried
+  scope :in_stock
+  scope :sold
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -63,7 +66,7 @@ ActiveAdmin.register Item do
       f.input :donation, collection: options_for_select(Donation.all.map{|d| ["#{d.description}", d.id]}, item.donation_id)
       item_type_descriptions = []
       Department.all.order(name: :asc).each do |department|
-        department.item_types.map do |item_type|
+        department.item_types.order(name: :asc).map do |item_type|
           item_type_descriptions << [item_type.description, item_type.id]
         end
       end
@@ -74,6 +77,7 @@ ActiveAdmin.register Item do
       f.input :use_of_item
       f.input :regular_price
       f.input :date_sold, as: :date_picker
+      f.input :sale_price
       f.input :rejected, label: 'Rejected at Pickup'
       f.input :rejection_reason
     end

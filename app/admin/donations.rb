@@ -3,6 +3,11 @@ ActiveAdmin.register Donation do
   config.batch_actions = false if Rails.env.production?
   menu priority: 11
 
+  scope :today
+  scope :future
+  scope :past
+  scope :picked_up
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -37,7 +42,7 @@ ActiveAdmin.register Donation do
     column :donor
     column :pickup
     column :pickup_date
-    column :info_collected_by
+    column :number_of_items, label: '# Items' do |donation| donation.items.count; end
     actions
   end
 
@@ -98,8 +103,13 @@ ActiveAdmin.register Donation do
       f.input :special_instructions
     end
     f.actions
-
   end
 
+  filter :donor
+  filter :items
+  filter :date_of_contact
+  filter :info_collected_by
+  filter :pickup_date
+  filter :pickup
 end
 
