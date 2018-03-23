@@ -67,7 +67,7 @@ class Item < ApplicationRecord
 
 private
   def inventory_number_generator
-    same_day_items = Item.where(item_type_id: item_type_id).where(date_received: date_received).to_a
+    same_day_items = Item.inventoried.where(item_type_id: item_type_id).where(date_received: date_received).to_a
     same_day_items.delete(self)
     item_type_day_count = same_day_items.length + 1
     date_string = date_received.strftime("%m%d%Y")
