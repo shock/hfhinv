@@ -18,7 +18,7 @@ rescue ActiveRecord::RecordInvalid
   puts "Admin user with email #{admin_params.email} already exists, skipping..."
 end
 
-if Rails.env.development?
+if Rails.env.development? || ENV['RESET_ALL_SEEDS']=='true'
   puts "Destroying existing Items, ItemTypes, and Departments for integrity"
   Item.destroy_all
   ItemType.destroy_all
@@ -31,7 +31,7 @@ DEPARTMENTS = {
     {name: "Dryer", code: "Dryer", notes: "Include maker and color, Note if GAS"},
     {name: "Refrigerator", code: "Fridge", notes: "Include maker and color, Note if GAS"},
     {name: "Freezer", code: "Freezer", notes: "Include maker and color, Note if GAS"},
-    {name: "Stove", code: "Stove", notes: "Include maker and color, Note if GAS"},
+    {name: "Stove", code: "Stove", notes: "Include maker and color, Note if GAS, has oven?, etc"},
     {name: "Cooktop", code: "Cooktop", notes: "Include maker and color, Note if GAS"},
     {name: "Wall Oven", code: "Oven", notes: "Include maker and color, Note if GAS"},
     {name: "Hood", code: "Hood", notes: "Include maker and color, Note if GAS"},
