@@ -51,7 +51,7 @@ class Item < ApplicationRecord
   private :check_update_inventory_number
 
   def update_in_stock_flag
-    self.in_stock = self.received? && self.use_of_item.inventory? && !self.sold?
+    self.in_stock = self.received? && self.use_of_item.present? && self.use_of_item.inventory? && !self.sold?
   end
 
   #  ====================

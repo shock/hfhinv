@@ -20,7 +20,16 @@ ActiveAdmin.register Item do
   #   permitted
   # end
 
+  before_action :new_item_defaults, only: [:new]
+
   controller do
+    def new_item_defaults
+      @item = Item.new
+      donation = Donation.find(params[:item][:donation_id])
+      @item.donation = donation
+      @item.date_received = Date.today unless donation.pickup?
+    end
+
     def scoped_collection
       super.includes({item_type: :department})
     end
