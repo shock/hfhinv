@@ -47,7 +47,7 @@ ActiveAdmin.register Donation do
     actions
   end
 
-  show do
+  show title: proc{ |donation| donation.description} do
     attributes_table do
       row :donor do |donation| link_to(donation.donor.description, admin_donor_path(donation.donor)) end
       row :date_of_contact

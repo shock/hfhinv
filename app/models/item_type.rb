@@ -10,6 +10,8 @@ class ItemType < ApplicationRecord
   #  = AR Validations =
   #  ==================
   validates :department_id, presence: true
+  validates :name, presence: true, uniqueness: {scope: :department}
+  validates :code, presence: true, uniqueness: true
 
   #  =================
   #  = Class Methods =

@@ -20,6 +20,12 @@ ActiveAdmin.register Item do
   #   permitted
   # end
 
+  controller do
+    def scoped_collection
+      super.includes({item_type: :department})
+    end
+  end
+
   index do
     selectable_column
     id_column unless Rails.env.production?
