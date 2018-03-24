@@ -18,6 +18,7 @@ ActiveAdmin.register Department do
 
   index do
     selectable_column
+    id_column unless Rails.env.production?
     column :name do |department| link_to(department.name, admin_department_path(department)); end
     actions defaults: false do |department|
       output = []

@@ -39,7 +39,7 @@ ActiveAdmin.register Donation do
 
   index do
     selectable_column
-    id_column
+    id_column unless Rails.env.production?
     column :donor
     column :pickup
     column :pickup_date

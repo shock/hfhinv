@@ -31,7 +31,7 @@ ActiveAdmin.register Donor do
 
   index do
     selectable_column
-    # id_column
+    id_column unless Rails.env.production?
 
     column :first do |donor| link_to "#{donor.first_name}", admin_donor_path(donor) end
     column :last_name do |donor| link_to "#{donor.last_name}", admin_donor_path(donor) end

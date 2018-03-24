@@ -18,11 +18,12 @@ rescue ActiveRecord::RecordInvalid
   puts "Admin user with email #{admin_params.email} already exists, skipping..."
 end
 
-if Rails.env.development? || ENV['RESET_ALL_SEEDS']=='true'
-  puts "Destroying existing Items, ItemTypes, and Departments for integrity"
+if ENV['RESET_ALL_SEEDS']=='true'
+  puts "Destroying existing Items, ItemTypes, UseOfItems and Departments for integrity"
   Item.destroy_all
   ItemType.destroy_all
   Department.destroy_all
+  UseOfItem.destroy_all
 end
 
 DEPARTMENTS = {
@@ -215,8 +216,7 @@ DEPARTMENTS.each do |name, item_type_attrs|
 end
 
 puts "Creating UseOfItems"
-USES_OF_ITEMS = ["Inventory", "Recycle", "Donate", "Use In Store", "Discard"]
-USES_OF_ITEMS.each do |name|
+UseOfItem::USES_OF_ITEM.each do |name|
   UseOfItem.find_or_create_by(name: name)
 end
 

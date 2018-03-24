@@ -21,7 +21,7 @@ ActiveAdmin.register Item do
 
   index do
     selectable_column
-    id_column
+    id_column unless Rails.env.production?
     column :item_type do |item| item.summary_description end
     column :use_of_item do |item|
       item.use_of_item.name rescue nil
