@@ -24,6 +24,7 @@ if ENV['RESET_ALL_SEEDS']=='true'
   ItemType.destroy_all
   Department.destroy_all
   UseOfItem.destroy_all
+  Donor.where(first_name: "Anonymous", last_name: "Donor", phone: "5555555555", city: "Norman", zip: "73069").destroy_all
 end
 
 DEPARTMENTS = {
@@ -220,8 +221,9 @@ UseOfItem::USES_OF_ITEM.each do |name|
   UseOfItem.find_or_create_by(name: name)
 end
 
-puts "Creating Anonymous Donor"
-params = {first_name: "Anonymous", last_name: "Donor", city: "Norman", state: "OK", zip: "73069", phone: "555-555-5555"}
-Donor.find_or_create_by(params)
+unless Donor.where(first_name: "Anonymous", last_name: "Donor", phone: "5555555555", city: "Norman", zip: "73069").count > 0
+  puts "Creating Anonymous Donor"
+  Donor.create(first_name: "Anonymous", last_name: "Donor", city: "Norman", state: "OK", zip: "73069", phone: "555-555-5555")
+end
 
 puts "Database seeding successful"
