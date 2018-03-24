@@ -102,7 +102,6 @@ module HfhinvConsoleHelpers
     def d_id; donation_id; end
     def item_type_desc; item_type.description; end
     def use; use_of_item_name; end
-
   end
 
   module ActiveRecord

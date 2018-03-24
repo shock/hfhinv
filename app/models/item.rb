@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :donation
   belongs_to :item_type, optional: true
   belongs_to :use_of_item, optional: true
+  has_one :department, through: :item_type
 
   #  ==================
   #  = AR Validations =

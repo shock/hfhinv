@@ -86,10 +86,18 @@ ActiveAdmin.register Item do
 
   end
 
-  filter :donation, collection: -> { options_for_select(Donation.all.order(pickup_date: :desc).map{|d| [d.description, d.id]}) }
-  filter :item_type, collection: -> { options_for_select(ItemType.all_sorted.map{|i| [i.description, i.id]}) }
+  filter :donation, collection: -> {
+    options_for_select(Donation.all.order(pickup_date: :desc).map{|d| [d.description, d.id]})
+  }
+  filter :item_type, collection: -> {
+    options_for_select(ItemType.all_sorted.map{|i| [i.description, i.id]})
+  }
+  filter :department, collection: -> {
+    options_for_select(Department.all.order(:name).map{|i| [i.name, i.id]})
+  }
   filter :use_of_item
   flag_filter :in_stock
+  filter :inventory_number
   filter :date_sold
   filter :date_received
   filter :rejected
