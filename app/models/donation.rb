@@ -29,7 +29,7 @@ class Donation < ApplicationRecord
   #  = Instance Methods =
   #  ====================
   def description
-    "#{donor.full_name} - #{pickup_date}"
+    "#{pickup_date} - #{donor.full_name}"
   end
 
 end

@@ -20,6 +20,7 @@ class Item < ApplicationRecord
   #  =============
   #  = AR Scopes =
   #  =============
+  scope :received, -> { where.not(date_received: nil) }
   scope :inventoried, -> { where("use_of_item_id = ?", UseOfItem.find_by_name("Inventory").id) }
   scope :in_stock, -> { inventoried.where(date_sold: nil) }
   scope :sold, -> { inventoried.where.not(date_sold: nil) }
@@ -47,6 +48,12 @@ class Item < ApplicationRecord
   #  ====================
   def summary_description
     "#{item_type.department.name} - #{item_type.name}"
+  end
+
+  def full_description
+    d = "#{item_type.department.name} - #{item_type.name}"
+    d << " (#{inventory_number})" if inventory_number.present?
+    d
   end
 
   def inventoried

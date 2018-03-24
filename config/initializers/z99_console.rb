@@ -157,13 +157,11 @@ class Object
   # Hirb resizer and helper reloader shortcut
   def hr
     Hirb::View.resize
+    ActiveRecord::Base.send(:include, HfhinvConsoleHelpers::ActiveRecord)
 
-    # Event.send(:include, HfhinvConsoleHelpers::Event)
-    # Album.send(:include, HfhinvConsoleHelpers::Album)
-    # Photo.send(:include, HfhinvConsoleHelpers::Photo)
-    # Portfolio.send(:include, HfhinvConsoleHelpers::Portfolio)
-    # PromoCode.send(:include, HfhinvConsoleHelpers::PromoCode)
-    # Review.send(:include, HfhinvConsoleHelpers::Review)
+    AdminUser.send(:include, HfhinvConsoleHelpers::AdminUser)
+    Donation.send(:include, HfhinvConsoleHelpers::Donation)
+    Item.send(:include, HfhinvConsoleHelpers::Item)
 
     silence_warnings {
       # Shortcut aliases for common AR classes

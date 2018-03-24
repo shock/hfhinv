@@ -1,6 +1,7 @@
 ActiveAdmin.register Item do
   config.batch_actions = false if Rails.env.production?
   menu priority: 12
+  scope :received
   scope :inventoried
   scope :in_stock
   scope :sold
@@ -36,11 +37,11 @@ ActiveAdmin.register Item do
   end
 
 
-  show do
+  show title: proc{ |item| item.full_description } do
     attributes_table do
+      row :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)) end
       row :item_type do |item| item.summary_description end
       row :description
-      row :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)) end
       row :date_received
       row :use_of_item do |item| item.use_of_item.name rescue nil end
       row :inventory_number
@@ -85,6 +86,7 @@ ActiveAdmin.register Item do
 
   end
 
-
+  filter :donation, collection: -> { options_for_select(Donation.all.order(pickup_date: :desc).map{|d| [d.description, d.id]}) }
+  filter :item_type, collection: -> { options_for_select(ItemType.all_sorted.map{|i| [i.description, i.id]}) }
 
 end
