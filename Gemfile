@@ -51,6 +51,9 @@ gem 'json'
 # Nice AR record formatiing in console
 gem 'hirb'
 
+# bitwise flags for SQL integer columns
+gem 'flag_shih_tzu'
+gem 'pry'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

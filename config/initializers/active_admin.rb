@@ -1,3 +1,5 @@
+Dir["#{Rails.root}/app/admin/support/*.rb"].each {|file| require file }
+
 ActiveAdmin.setup do |config|
   # == Site Title
   #

@@ -30,7 +30,7 @@ ActiveAdmin.register Item do
     column :regular_price
     # column :sale_price
     column :date_received
-    column :rejected
+    column :in_stock
     column :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)); end
     column :inventory_number
     actions
@@ -88,5 +88,9 @@ ActiveAdmin.register Item do
 
   filter :donation, collection: -> { options_for_select(Donation.all.order(pickup_date: :desc).map{|d| [d.description, d.id]}) }
   filter :item_type, collection: -> { options_for_select(ItemType.all_sorted.map{|i| [i.description, i.id]}) }
-
+  filter :use_of_item
+  flag_filter :in_stock
+  filter :date_sold
+  filter :date_received
+  filter :rejected
 end

@@ -67,9 +67,6 @@
         - id
         - item_type_desc
         - price
-        - date_received
-        - date_sold
-        - r
         - d_id
         - inventory_number
         - use

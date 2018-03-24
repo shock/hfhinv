@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  include HasFlags
 
   #  ===================
   #  = AR Associations =
@@ -17,18 +18,23 @@ class Item < ApplicationRecord
   validates :sale_price, presence: { message: 'Required for sold items' }, if: :sold
   validates :rejection_reason, absence: { message: "You must mark the item as rejected before filling this field" }, unless: :rejected
 
+  #  =========
+  #  = Flags =
+  #  =========
+  has_flags 1 => :in_stock
+
   #  =============
   #  = AR Scopes =
   #  =============
   scope :received, -> { where.not(date_received: nil) }
   scope :inventoried, -> { where("use_of_item_id = ?", UseOfItem.find_by_name("Inventory").id) }
-  scope :in_stock, -> { inventoried.where(date_sold: nil) }
   scope :sold, -> { inventoried.where.not(date_sold: nil) }
 
   #  ================
   #  = AR Callbacks  =
   #  ================
   before_save :check_update_inventory_number
+  before_save :update_in_stock_flag
 
   def check_update_inventory_number
     if use_of_item_id_changed?
@@ -42,6 +48,10 @@ class Item < ApplicationRecord
     end
   end
   private :check_update_inventory_number
+
+  def update_in_stock_flag
+    self.in_stock = self.received? && self.use_of_item.inventory? && !self.sold?
+  end
 
   #  ====================
   #  = Instance Methods =

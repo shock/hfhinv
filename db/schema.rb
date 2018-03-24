@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323121706) do
+ActiveRecord::Schema.define(version: 20180324160640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20180323121706) do
     t.string "inventory_number"
     t.string "description"
     t.integer "use_of_item_id"
+    t.integer "flags", default: 0, null: false
   end
 
   create_table "use_of_items", force: :cascade do |t|
