@@ -1,4 +1,4 @@
-workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+# workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 # Default Rails config below, consistent with Heroku's recommendation as of 03/22/2018
 # see: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
 
