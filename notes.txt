@@ -6,11 +6,11 @@ TODO:
 - Deploy to Heroku (https://hfhinv.herokuapp.com/admin), works
 - Use Item description on Item show page title, when available
 - Add flow from Donor entry, to Donation entry, to adding multiple Items for a donation
+- Scope items by ItemType and Department
 * Update Donations show Title to something more descriptive
     https://github.com/activeadmin/activeadmin/issues/184
 * Try to get better date-time picker for pickup dates
     https://github.com/activeadmin/activeadmin/wiki/combine-datetime-picker-with-activeadmin
-* Scope items by ItemType and Department
 * Don't let admin delete Departments or ItemTypes if they have associated items
 * Create function to export Inventory Items for import into QuickBooks
 * Create function to import QuickBooks inventory and update date_sold, and sale_price
@@ -19,19 +19,39 @@ TODO:
 * Export a Pickup Manifest for a given date, perhaps as HTML, then print from browser
 * include item_types and departments on Items index load
 * include notes in Items filter
-# For items whose ItemTYpe has no code, do not automatically create an inventory number
+# For items whose ItemType has no code, do not automatically create an inventory number
 * Show Miscellaneous in item_type drop-down and require description
 * Create "Other" ItemType for all Departments, and have an freeform field for type name and code, as well as a checkbox for whether or not to add it to the database
-* Add a General Stock UseOfItem type
+* Add a "General Stock" UseOfItem type to seeds.
 * Use select2 for item_type dropdown in new Item so users can start typing the type and filter selections
+* create cchfh.yml file for and use for seeds and zipcode -> dotw mappings
+* Modify Item form and move UseOfItem field up
+* Once UseOfItem is set, auto-set the received_date to Today
+* Get official HFH colors from Zakk's texts and google for the official HFH braning guide
+* Re-skin the app, using official colors.  Allow admin to change them?
 
-Questions for Zakk:
+===========
+= Reports =
+===========
+
+* Items sold by date range, with breakdown on quantity, and type
+* Current Inventory (in store/in stock)
+* Best sellers by quantity (for all time or date range), order by highest quantity
+* Best sellers by revenue (for all time or date range), order by highest earners
+
+======================
+= Questions for Zakk =
+======================
+
 
 ** get zipcode -> weekday mappings from Zakk or Mike and validate donation pickup_dates
   - do make exceptions, just add warning when dotw does not match zip
 
 ** Find out if we can conigure QuickBooks to export sales data with items ID, item#, sale price, and sale date
 
+===============
+= Other notes =
+===============
 
 Chrome Remote Desktop - check it out
 
