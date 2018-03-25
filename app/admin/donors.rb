@@ -39,7 +39,7 @@ ActiveAdmin.register Donor do
     column :city
     column :zip
     column :phone do |donor| format_phone_number(donor.phone) rescue nil end
-    column :phone2 do |donor| format_phone_number(donor.phone2) rescue nil end
+    # column :phone2 do |donor| format_phone_number(donor.phone2) rescue nil end
     actions name: 'Actions'
   end
 
@@ -83,7 +83,7 @@ ActiveAdmin.register Donor do
   filter :first_name
   filter :last_name
   filter :email
-  filter :phone
-  filter :phone2
+  filter :phone, input_html: {placeholder: "enter digits only"}
+  filter :phone2, input_html: {placeholder: "enter digits only"}
 
 end
