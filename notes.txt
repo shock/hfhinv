@@ -18,9 +18,21 @@ TODO:
 * when listing items for a donation that has been picked_up, highlight items that have not be marked as received
 * Export a Pickup Manifest for a given date, perhaps as HTML, then print from browser
 * include item_types and departments on Items index load
-
+* include notes in Items filter
+# For items whose ItemTYpe has no code, do not automatically create an inventory number
+* Show Miscellaneous in item_type drop-down and require description
+* Create "Other" ItemType for all Departments, and have an freeform field for type name and code, as well as a checkbox for whether or not to add it to the database
+* Add a General Stock UseOfItem type
+* Use select2 for item_type dropdown in new Item so users can start typing the type and filter selections
 
 Questions for Zakk:
 
 ** get zipcode -> weekday mappings from Zakk or Mike and validate donation pickup_dates
+  - do make exceptions, just add warning when dotw does not match zip
+
 ** Find out if we can conigure QuickBooks to export sales data with items ID, item#, sale price, and sale date
+
+
+Chrome Remote Desktop - check it out
+
+Checkout TechSoup.org for pricing - Zakk thinks I could easily market this to other Habitat chapters, and even offerred to help.
