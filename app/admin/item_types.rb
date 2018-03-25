@@ -33,7 +33,7 @@ ActiveAdmin.register ItemType do
     column :code
     column :notes
     column :department
-    actions defaults: false do |item_type|
+    actions name: 'Actions', defaults: false do |item_type|
       output = []
       output << link_to("View", admin_item_type_path(item_type))
       output << link_to("Edit", edit_admin_item_type_path(item_type))

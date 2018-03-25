@@ -57,6 +57,11 @@ class Item < ApplicationRecord
   #  ====================
   #  = Instance Methods =
   #  ====================
+
+  def display_name
+    self.id
+  end
+
   def summary_description
     "#{item_type.department.name} - #{item_type.name}"
   end

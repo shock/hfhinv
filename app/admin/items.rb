@@ -5,6 +5,7 @@ ActiveAdmin.register Item do
   scope :inventoried
   scope :in_stock
   scope :sold
+  config.sort_order = 'departments.name_asc'
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -25,30 +26,32 @@ ActiveAdmin.register Item do
   controller do
     def new_item_defaults
       @item = Item.new
-      donation = Donation.find(params[:item][:donation_id])
+      donation = Donation.find(params[:item][:donation_id]) rescue nil
       @item.donation = donation
-      @item.date_received = Date.today unless donation.pickup?
+      @item.date_received = Date.today unless donation.pickup? rescue nil
     end
 
     def scoped_collection
-      super.includes({item_type: :department})
+      super.includes({item_type: :department}).joins({item_type: :department})
     end
   end
 
   index do
     selectable_column
-    id_column unless Rails.env.production?
-    column :item_type do |item| item.summary_description end
+    id_column
+    column :department, sortable: 'departments.name'
+    column :item_type, sortable: 'item_types.name'
+    # column :item_type do |item| item.summary_description end
     column :use_of_item do |item|
       item.use_of_item.name rescue nil
     end
-    column :regular_price
+    column :price, sortable: 'regular_price' do |item| item.regular_price; end
     # column :sale_price
     column :date_received
     column :in_stock
     column :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)); end
     column :inventory_number
-    actions
+    actions name: 'Actions'
   end
 
 
@@ -74,7 +77,6 @@ ActiveAdmin.register Item do
     end
     active_admin_comments
   end
-
 
   form do |f|
 

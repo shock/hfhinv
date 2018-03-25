@@ -20,7 +20,7 @@ ActiveAdmin.register Department do
     selectable_column
     id_column unless Rails.env.production?
     column :name do |department| link_to(department.name, admin_department_path(department)); end
-    actions defaults: false do |department|
+    actions name: 'Actions', defaults: false do |department|
       output = []
       output << link_to("View", admin_department_path(department))
       output << link_to("Edit", edit_admin_department_path(department))

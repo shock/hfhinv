@@ -2,6 +2,7 @@ ActiveAdmin.register Donation do
   actions :all, :except => [:destroy] if Rails.env.production?
   config.batch_actions = false if Rails.env.production?
   menu priority: 11
+  config.sort_order = 'pickup_date_desc'
 
   scope :today
   scope :future
@@ -44,7 +45,7 @@ ActiveAdmin.register Donation do
     column :pickup
     column :pickup_date
     column :number_of_items, label: '# Items' do |donation| donation.items.count; end
-    actions
+    actions name: 'Actions'
   end
 
   show title: proc{ |donation| donation.description} do

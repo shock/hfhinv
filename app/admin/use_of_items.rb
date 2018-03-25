@@ -20,7 +20,7 @@ ActiveAdmin.register UseOfItem do
     selectable_column
     id_column unless Rails.env.production?
     column :name
-    actions defaults: false do |item|
+    actions name: 'Actions', defaults: false do |item|
       output = []
       output << link_to("View", admin_item_path(item))
       output << link_to("Edit", edit_admin_item_path(item))

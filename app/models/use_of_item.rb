@@ -1,6 +1,6 @@
 class UseOfItem < ApplicationRecord
   has_many :items
-  USES_OF_ITEM = ["Inventory", "Recycle", "Donate", "Use In Store", "Discard"]
+  USES_OF_ITEM = ["Inventory", "General Stock", "Recycle", "Donate", "Use In Store", "Discard"]
 
   validates :name, presence: true, uniqueness: true
 
