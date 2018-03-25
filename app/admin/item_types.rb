@@ -1,6 +1,7 @@
 ActiveAdmin.register ItemType do
   config.batch_actions = false if Rails.env.production?
   menu parent: 'Admin'
+  config.sort_order = 'departments.name_asc'
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -24,6 +25,11 @@ ActiveAdmin.register ItemType do
         @item_type.department_id = department_id
       end
     end
+
+    def scoped_collection
+      super.joins(:department)
+    end
+
   end
 
   index do
@@ -32,13 +38,15 @@ ActiveAdmin.register ItemType do
     column :name do |item_type| link_to(item_type.name, admin_item_type_path(item_type)); end
     column :code
     column :notes
-    column :department
+    column :department, sortable: 'departments.name'
     actions name: 'Actions', defaults: false do |item_type|
       output = []
       output << link_to("View", admin_item_type_path(item_type))
       output << link_to("Edit", edit_admin_item_type_path(item_type))
-      output << link_to("Delete", admin_item_type_path(item_type), method: :delete,
-        data: {confirm: "Are you absolutely sure you want to delete #{item_type.name}? If any items exist with this item type, you will corrupt the database!!"})
+      unless item_type.items.count > 0
+        output << link_to("Delete", admin_item_type_path(item_type), method: :delete,
+          data: {confirm: "Are you sure you want to delete #{item_type.name}?"})
+      end
       output.join(' ').html_safe
     end
   end
@@ -50,5 +58,9 @@ ActiveAdmin.register ItemType do
       row :department do |item_type| item_type.department.name end
     end
   end
+
+  filter :department
+  filter :code
+  filter :notes
 
 end

@@ -95,7 +95,7 @@ class Item < ApplicationRecord
   alias :sold? :sold
 
   def use_of_item_name
-    "#{use_of_item.name}"
+    "#{use_of_item.name}" rescue nil
   end
 
   #  ========================================

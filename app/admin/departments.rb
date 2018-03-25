@@ -24,8 +24,10 @@ ActiveAdmin.register Department do
       output = []
       output << link_to("View", admin_department_path(department))
       output << link_to("Edit", edit_admin_department_path(department))
-      output << link_to("Delete", admin_department_path(department), method: :delete,
-        data: {confirm: "Are you absolutely sure you want to delete #{department.name}? If any items exist in this department, you will corrupt the database!!"})
+      unless department.items.count > 0
+        output << link_to("Delete", admin_department_path(department), method: :delete,
+          data: {confirm: "Are you sure you want to delete #{department.name}?"})
+      end
       output.join(' ').html_safe
     end
   end

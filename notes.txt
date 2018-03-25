@@ -14,9 +14,9 @@ DONE:
     https://github.com/activeadmin/activeadmin/issues/184
 * include item_types and departments on Items index load for filter collections
 * include description in Items filter
+* Don't let admin delete Departments or ItemTypes if they have associated items
 
 TODO:
-* Don't let admin delete Departments or ItemTypes if they have associated items
 * Create "Other" ItemType for all Departments, and have an freeform field for type name and code, as well as * Set place-holder text for item description based on ItemType notes selected
 * Once UseOfItem is set, auto-set the received_date to Today
 * Show Miscellaneous in item_type drop-down and require description
