@@ -41,7 +41,18 @@ ActiveAdmin.register Donor do
     column :phone do |donor| format_phone_number(donor.phone) rescue nil end
     # column :phone2 do |donor| format_phone_number(donor.phone2) rescue nil end
     column :num_donations, label: '# donations' do |donor| donor.donations.count; end
-    actions name: 'Actions'
+    actions name: 'Actions', defaults: false do |donor|
+      output = []
+      output << link_to("View", admin_donor_path(donor))
+      output << link_to("Edit", edit_admin_donor_path(donor))
+      unless Rails.env.production?
+        output << link_to("Delete", admin_donor_path(donor), method: :delete,
+          data: {confirm: "Are you sure you want to delete #{donor.full_name}?"})
+      end
+      output << link_to("View on Map", donor.google_maps_url, target: "_blank")
+      output.join(' ').html_safe
+    end
+
   end
 
   show do
