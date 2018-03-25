@@ -119,4 +119,5 @@ ActiveAdmin.register Item do
   filter :date_sold
   filter :date_received
   filter :rejected
+  filter :description
 end
