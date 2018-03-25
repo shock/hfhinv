@@ -8,10 +8,10 @@ DONE:
 - Scope items by ItemType and Department
 - Add a "General Stock" UseOfItem type to seeds.
 - For items whose ItemType has no code, do not automatically create an inventory number
+- Use select2 for item_type dropdown in new Item so users can start typing the type and filter selections
 
 TODO:
 * Show # of donations for Donors index.
-* Use select2 for item_type dropdown in new Item so users can start typing the type and filter selections
 * Update Donations show Title to something more descriptive
     https://github.com/activeadmin/activeadmin/issues/184
 * Try to get better date-time picker for pickup dates

@@ -90,7 +90,7 @@ ActiveAdmin.register Item do
         end
       end
 
-      f.input :item_type, collection: options_for_select(item_type_descriptions, item.item_type_id)
+      f.input :item_type, class: 'select2', collection: options_for_select(item_type_descriptions, item.item_type_id)
       f.input :description
       f.input :date_received, as: :date_picker
       f.input :use_of_item
