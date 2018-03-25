@@ -23,8 +23,12 @@ class UseOfItem < ApplicationRecord
   end
 
   def method_missing(method, *args)
-    if method.to_s =~ /#{name_underscored}\??/
-      return (method.to_s =~ /#{name_underscored}\??/) == 0
+    if method.to_s.gsub(/\?\Z/, '').in?(self.class.uses_methods)
+      if method.to_s =~ /#{name_underscored}\??/
+        return true
+      else
+        return false
+      end
     else
       super
     end
