@@ -2,35 +2,35 @@ Devise setup instructions: https://github.com/plataformatec/devise#getting-start
 
 
 DONE:
-- Deploy to Heroku (https://hfhinv.herokuapp.com/admin), works
-- Use Item description on Item show page title, when available
-- Add flow from Donor entry, to Donation entry, to adding multiple Items for a donation
-- Scope items by ItemType and Department
-- Add a "General Stock" UseOfItem type to seeds.
-- For items whose ItemType has no code, do not automatically create an inventory number
-- Use select2 for item_type dropdown in new Item so users can start typing the type and filter selections
-
-TODO:
+* Deploy to Heroku (https://hfhinv.herokuapp.com/admin), works
+* Use Item description on Item show page title, when available
+* Add flow from Donor entry, to Donation entry, to adding multiple Items for a donation
+* Scope items by ItemType and Department
+* Add a "General Stock" UseOfItem type to seeds.
+* For items whose ItemType has no code, do not automatically create an inventory number
+* Use select2 for item_type dropdown in new Item so users can start typing the type and filter selections
 * Show # of donations for Donors index.
 * Update Donations show Title to something more descriptive
     https://github.com/activeadmin/activeadmin/issues/184
-* Try to get better date-time picker for pickup dates
-    https://github.com/activeadmin/activeadmin/wiki/combine-datetime-picker-with-activeadmin
+* include item_types and departments on Items index load for filter collections
+
+TODO:
 * Don't let admin delete Departments or ItemTypes if they have associated items
+* Set place-holder text for item description based on ItemType notes selected
+* Once UseOfItem is set, auto-set the received_date to Today
 * Create function to export Inventory Items for import into QuickBooks
 * Create function to import QuickBooks inventory and update date_sold, and sale_price
-* Set place-holder text for item description based on ItemType notes selected
 * when listing items for a donation that has been picked_up, highlight items that have not be marked as received
 * Export a Pickup Manifest for a given date, perhaps as HTML, then print from browser
-* include item_types and departments on Items index load for filter collections
 * include notes in Items filter
 * Show Miscellaneous in item_type drop-down and require description
 * Create "Other" ItemType for all Departments, and have an freeform field for type name and code, as well as a checkbox for whether or not to add it to the database
 * create cchfh.yml file for and use for seeds and zipcode -> dotw mappings
 * Modify Item form and move UseOfItem field up
-* Once UseOfItem is set, auto-set the received_date to Today
 * Get official HFH colors from Zakk's texts and google for the official HFH braning guide
 * Re-skin the app, using official colors.  Allow admin to change them?
+* Try to get better date-time picker for pickup dates
+    https://github.com/activeadmin/activeadmin/wiki/combine-datetime-picker-with-activeadmin
 
 ===========
 = Reports =
