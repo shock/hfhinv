@@ -43,12 +43,16 @@ class Donor < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def full_address
+  def street_address
     "#{address} #{address2}"
   end
 
   def city_state
     "#{city}, #{state}"
+  end
+
+  def full_address
+    "#{address}, #{city}, #{state} #{zip}"
   end
 
   def formatted_phone
@@ -71,5 +75,13 @@ class Donor < ApplicationRecord
     desc = "#{full_name}"
     desc << " (#{email})" if email.present?
     desc
+  end
+
+  def html_encoded_address
+    "#{full_address}".gsub(' ', '+')
+  end
+
+  def google_maps_url
+    "https://www.google.com/maps/place/#{html_encoded_address}"
   end
 end

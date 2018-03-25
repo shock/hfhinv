@@ -2,6 +2,7 @@ Devise setup instructions: https://github.com/plataformatec/devise#getting-start
 
 
 DONE:
+
 * Deploy to Heroku (https://hfhinv.herokuapp.com/admin), works
 * Use Item description on Item show page title, when available
 * Add flow from Donor entry, to Donation entry, to adding multiple Items for a donation
@@ -15,16 +16,18 @@ DONE:
 * include item_types and departments on Items index load for filter collections
 * include description in Items filter
 * Don't let admin delete Departments or ItemTypes if they have associated items
+* Create "Other" ItemType for all Departments, and have an freeform field for type name and code, as well as
 
 TODO:
-* Create "Other" ItemType for all Departments, and have an freeform field for type name and code, as well as * Set place-holder text for item description based on ItemType notes selected
-* Once UseOfItem is set, auto-set the received_date to Today
-* Show Miscellaneous in item_type drop-down and require description
+
+* Use geokit gem to geocode donor addresses and determine optimal routes
+  https://stackoverflow.com/questions/11804073/google-map-v3-how-to-get-list-of-best-driving-route-for-multiple-destinations
+* Set place-holder text for item description based on selected ItemType notes
+* Once UseOfItem is set, auto-set the received_date to Today if it's not already
 * Create function to export Inventory Items for import into QuickBooks
 * Create function to import QuickBooks inventory and update date_sold, and sale_price
 * when listing items for a donation that has been picked_up, highlight items that have not be marked as received
 * Export a Pickup Manifest for a given date, perhaps as HTML, then print from browser
-a checkbox for whether or not to add it to the database
 * create cchfh.yml file for and use for seeds and zipcode -> dotw mappings
 * Modify Item form and move UseOfItem field up
 * Get official HFH colors from Zakk's texts and google for the official HFH braning guide

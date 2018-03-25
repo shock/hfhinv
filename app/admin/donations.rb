@@ -52,6 +52,13 @@ ActiveAdmin.register Donation do
   show title: proc{ |donation| donation.description} do
     attributes_table do
       row :donor do |donation| link_to(donation.donor.description, admin_donor_path(donation.donor)) end
+      row :location do |donation|
+        donor = donation.donor
+        output = []
+        output << donor.full_address
+        output << link_to("View on Map", donor.google_maps_url, target: "_blank", class: "small_button")
+        output.join("&nbsp;&nbsp;&nbsp;").html_safe
+      end
       row :date_of_contact
       row :info_collected_by
       row :pickup

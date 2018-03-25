@@ -1,0 +1,7 @@
+@mixin small-button {
+  @include default-button;
+  text-decoration: none;
+  font-size: 0.9em;
+  line-height: 7px;
+  padding: 4px 7px 4px;
+}

@@ -35,7 +35,7 @@ ActiveAdmin.register Donor do
 
     column :first do |donor| link_to "#{donor.first_name}", admin_donor_path(donor) end
     column :last_name do |donor| link_to "#{donor.last_name}", admin_donor_path(donor) end
-    column :full_address
+    column :street_address
     column :city
     column :zip
     column :phone do |donor| format_phone_number(donor.phone) rescue nil end
@@ -47,7 +47,7 @@ ActiveAdmin.register Donor do
   show do
     attributes_table do
       row :full_name
-      row :full_address
+      row :street_address
       row :city_state
       row :zip
       row :phone_numbers
@@ -87,5 +87,6 @@ ActiveAdmin.register Donor do
   filter :email
   filter :phone, input_html: {placeholder: "enter digits only"}
   filter :phone2, input_html: {placeholder: "enter digits only"}
+  filter :zip
 
 end

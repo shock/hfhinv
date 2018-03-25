@@ -49,7 +49,8 @@ ActiveAdmin.register_page "Dashboard" do
         end
         column :actions do |donation|
           output = []
-          output << link_to("View", admin_donation_path(donation))
+          output << link_to("View Donation", admin_donation_path(donation))
+          output << link_to("View on Map", donation.donor.google_maps_url, target: :_blank)
           output.join(" ").html_safe
         end
 
