@@ -4,6 +4,7 @@ ActiveAdmin.register Donation do
   menu priority: 11
   config.sort_order = 'pickup_date_desc'
 
+  scope :all, default: true
   scope :today
   scope :future
   scope :past

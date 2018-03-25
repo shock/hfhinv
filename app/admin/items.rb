@@ -1,6 +1,7 @@
 ActiveAdmin.register Item do
   config.batch_actions = false if Rails.env.production?
   menu priority: 12
+  scope :all, default: true
   scope :received
   scope :inventoried
   scope :in_stock

@@ -28,7 +28,10 @@ class Item < ApplicationRecord
   #  = AR Scopes =
   #  =============
   scope :received, -> { where.not(date_received: nil) }
-  scope :inventoried, -> { where("use_of_item_id = ?", UseOfItem.find_by_name("Inventory").id) }
+  scope :inventoried, -> {
+    joins(:item_type).where("use_of_item_id = ?", UseOfItem.find_by_name("Inventory").id).
+      where("item_types.code IS NOT NULL AND item_types.code != ''")
+  }
   scope :sold, -> { inventoried.where.not(date_sold: nil) }
 
   #  ================
@@ -40,7 +43,7 @@ class Item < ApplicationRecord
   def check_update_inventory_number
     if use_of_item_id_changed?
       if item_type.present? && received?
-        if inventoried?
+        if inventoried? && item_type.code.present?
           self.inventory_number = inventory_number_generator
         else
           self.inventory_number = nil
@@ -51,7 +54,11 @@ class Item < ApplicationRecord
   private :check_update_inventory_number
 
   def update_in_stock_flag
-    self.in_stock = self.received? && self.use_of_item.present? && self.use_of_item.inventory? && !self.sold?
+    self.in_stock = self.received? &&
+      self.use_of_item.present? &&
+      self.use_of_item.inventory? &&
+      self.item_type.code.present? &&
+      !self.sold?
   end
 
   #  ====================
@@ -73,7 +80,7 @@ class Item < ApplicationRecord
   end
 
   def inventoried
-    use_of_item.name == "Inventory" rescue false
+    use_of_item.name == "Inventory" && use_of_item.code.present? rescue false
   end
   alias :inventoried? :inventoried
 
