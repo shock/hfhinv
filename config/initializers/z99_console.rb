@@ -100,8 +100,20 @@ module HfhinvConsoleHelpers
     # = Hirb Helper methods =
     # =======================
     def d_id; donation_id; end
-    def item_type_desc; item_type.description; end
+    def item_type_desc; item_type.description rescue nil; end
     def use; use_of_item_name; end
+  end
+
+  module ItemType
+    # =====================
+    # = Console Shortcuts =
+    # =====================
+
+    # =======================
+    # = Hirb Helper methods =
+    # =======================
+    def d_id; department_id; end
+    def d_name; department.name; end
   end
 
   module ActiveRecord
@@ -161,6 +173,7 @@ class Object
     AdminUser.send(:include, HfhinvConsoleHelpers::AdminUser)
     Donation.send(:include, HfhinvConsoleHelpers::Donation)
     Item.send(:include, HfhinvConsoleHelpers::Item)
+    ItemType.send(:include, HfhinvConsoleHelpers::ItemType)
 
     silence_warnings {
       # Shortcut aliases for common AR classes

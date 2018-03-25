@@ -12,7 +12,8 @@ ActiveAdmin.register Item do
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   permit_params :item_type_id, :expected, :donation_id, :use_of_item_id, :regular_price,
-    :sale_price, :date_received, :date_sold, :rejected, :rejection_reason, :item_number, :description
+    :sale_price, :date_received, :date_sold, :rejected, :rejection_reason, :item_number, :description,
+    :new_item_type_department_id, :new_item_type_name, :new_item_type_code, :new_item_type_notes
   #
   # or
   #
@@ -73,7 +74,7 @@ ActiveAdmin.register Item do
 
     panel "Actions" do
       output = []
-      output << link_to("Add Another Item to this Donation", new_admin_item_path(item:{donation_id: item.donation.id}), class: 'default_button')
+      output << link_to("Add Another Item to Donation: #{item.donation.description}", new_admin_item_path(item:{donation_id: item.donation.id}), class: 'default_button')
       output.join(" ").html_safe
     end
     active_admin_comments
@@ -88,9 +89,20 @@ ActiveAdmin.register Item do
         department.item_types.order(name: :asc).map do |item_type|
           item_type_descriptions << [item_type.description, item_type.id]
         end
+        item_type_descriptions << ["#{department.name} - Other", "-#{department.id}"]
       end
-
       f.input :item_type, class: 'select2', collection: options_for_select(item_type_descriptions, item.item_type_id)
+      div class: 'form-indented new-item-form hidden' do
+        output = "This will create a new Item Type in the "
+        output << '<a href="javascript:void" id="new-item-department-name"></a>'
+        output << " department.  Please be sure there is not an existing type that could be used first."
+        f.inputs output.html_safe do
+          f.input :new_item_type_department_id, as: :hidden
+          f.input :new_item_type_name, as: :string, input_html: {placeholder: 'Enter a brief name for this type of item'}
+          f.input :new_item_type_code, as: :string, input_html: {placeholder: 'Enter inventory number code'}
+          f.input :new_item_type_notes, as: :string, input_html: {placeholder: 'Enter notes on how to describe these types of items'}
+        end
+      end
       f.input :description
       f.input :date_received, as: :date_picker
       f.input :use_of_item
@@ -111,7 +123,7 @@ ActiveAdmin.register Item do
     options_for_select(ItemType.all_sorted.map{|i| [i.description, i.id]})
   }
   filter :department, collection: -> {
-    options_for_select(Department.all.order(:name).map{|i| [i.name, i.id]})
+    options_for_select(Department.all.order(:name).map{|d| [d.name, d.id]})
   }
   filter :use_of_item
   flag_filter :in_stock

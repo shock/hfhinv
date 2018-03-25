@@ -59,6 +59,8 @@
         - id
         - name
         - code
+        - d_name
+        - d_id
         - created
         - updated
   Item:

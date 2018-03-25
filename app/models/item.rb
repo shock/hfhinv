@@ -9,6 +9,11 @@ class Item < ApplicationRecord
   belongs_to :use_of_item, optional: true
   has_one :department, through: :item_type
 
+  #  ======================
+  #  = Virtual Attributes =
+  #  ======================
+  attr_accessor :new_item_type_department_id, :new_item_type_name, :new_item_type_code, :new_item_type_notes
+
   #  ==================
   #  = AR Validations =
   #  ==================
@@ -18,7 +23,8 @@ class Item < ApplicationRecord
   validates :date_received, presence: { message: 'Required for inventoried items' }, if: :inventoried
   validates :sale_price, presence: { message: 'Required for sold items' }, if: :sold
   validates :rejection_reason, absence: { message: "You must mark the item as rejected before filling this field" }, unless: :rejected
-
+  validates :new_item_type_name, presence: true, if: :creating_new_item_type?
+  validates :new_item_type_code, presence: true, if: :creating_new_item_type?
   #  =========
   #  = Flags =
   #  =========
@@ -37,11 +43,26 @@ class Item < ApplicationRecord
   #  ================
   #  = AR Callbacks  =
   #  ================
+  before_validation :check_for_new_item_type
   before_save :check_update_inventory_number
   before_save :update_in_stock_flag
 
+  def check_for_new_item_type
+    if self.new_item_type_department_id.present?
+      self.new_item_type_name = new_item_type_name.capitalize
+      self.new_item_type_code = new_item_type_code.capitalize
+      item_type = ItemType.find_or_create_by(department_id: new_item_type_department_id, name: new_item_type_name, code: new_item_type_code)
+      item_type.notes = new_item_type_notes
+      item_type.notes = 'brief description' unless item_type.notes.present?
+      item_type.save!
+      self.item_type = item_type
+    else
+    end
+  end
+  private :check_for_new_item_type
+
   def check_update_inventory_number
-    if use_of_item_id_changed?
+    if use_of_item_id_changed? || item_type_id_changed?
       if item_type.present? && received?
         if inventoried? && item_type.code.present?
           self.inventory_number = inventory_number_generator
@@ -80,7 +101,7 @@ class Item < ApplicationRecord
   end
 
   def inventoried
-    use_of_item.name == "Inventory" && use_of_item.code.present? rescue false
+    use_of_item.name == "Inventory" && item_type.code.present? rescue false
   end
   alias :inventoried? :inventoried
 
@@ -114,4 +135,7 @@ private
     "#{date_string}-#{item_type.code}#{item_type_day_count}"
   end
 
+  def creating_new_item_type?
+    new_item_type_department_id.present?
+  end
 end
