@@ -12,10 +12,10 @@ class Donor < ApplicationRecord
   #  ==================
   PHONE_REGEX = /\A((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}\Z/
   EMAIL_REGEX = %r{\A(?:[_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-zA-Z0-9\-\.]+)*(\.[a-z]{2,4})\Z}i
-  ZIP_REGEX = /\A\d{5}(?:-\d{4})?\Z/
+
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true, length: { minimum: 1 }
-  validates :zip, format: { with: ZIP_REGEX }, allow_blank: false
+  validates :zip, format: { with: ZipCode::ZIP_REGEX }, allow_blank: false
   validates :phone, format: { with: PHONE_REGEX, message: "is not a valid phone number, must be 10 digits" }, allow_blank: false
   validates :phone2, format: { with: PHONE_REGEX, message: "is not a valid phone number, must be 10 digits" }, allow_blank: true
 

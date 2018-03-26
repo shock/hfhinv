@@ -140,6 +140,7 @@ watch( '^lib/(.*)\.rb'                            ) { |m| run_specs("spec/lib/%s
 watch( '^app/views/(.*)\.erb'                    ) { |m| run_specs("spec/views/%s.erb_spec.rb" % m[1]) }
 watch( '^spec/factories/.*$'                    ) { |m| restart_spring }
 watch( '^config/.*$'                    ) { |m| restart_spring }
+watch( '^tmp/restart.txt$'                    ) { |m| restart_spring }
 watch( '^Gemfile.*$'                    ) { |m| restart_spring }
 
 puts "Watching..."

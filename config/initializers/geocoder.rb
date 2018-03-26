@@ -17,7 +17,7 @@ Geocoder.configure(
 
   # IP address geocoding service (see below for supported options):
   #ip_lookup: :freegeoip,
-  ip_lookup: :geocodeip,
+  # ip_lookup: :geocodeip,
 
   # to use an API key:
   #api_key: nil,

@@ -186,6 +186,7 @@ class Object
       Object.const_set "IT", ItemType
       Object.const_set "I",  Item
       Object.const_set "AU", AdminUser
+      Object.const_set "Z",  ZipCode
     }
     true
   end

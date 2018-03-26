@@ -20,9 +20,10 @@ DONE:
 * Add "View on Map" for Donors and Donations.
 
 TODO:
-
 * Use geokit gem to geocode donor addresses and determine optimal routes
   https://stackoverflow.com/questions/11804073/google-map-v3-how-to-get-list-of-best-driving-route-for-multiple-destinations
+  OR
+  https://github.com/graphhopper/graphhopper
 * Set place-holder text for item description based on selected ItemType notes
 * Once UseOfItem is set, auto-set the received_date to Today if it's not already
 * Create function to export Inventory Items for import into QuickBooks
@@ -35,6 +36,24 @@ TODO:
 * Re-skin the app, using official colors.  Allow admin to change them?
 * Try to get better date-time picker for pickup dates
     https://github.com/activeadmin/activeadmin/wiki/combine-datetime-picker-with-activeadmin
+
+
+ =======================
+ = DOTW Zips and towns =
+ =======================
+
+Monday
+- 73072, 73069
+Tuesday
+- 73071, 73069
+Wednesday
+- Moore and OKC
+- 73160, 73165, 73170
+Thursday
+- 73072, 73069
+Friday
+- 73071, 73076, 73068
+- Noble
 
 ===========
 = Reports =

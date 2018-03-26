@@ -55,6 +55,7 @@ gem 'hirb'
 gem 'flag_shih_tzu'
 
 gem 'pry'
+gem 'pry-doc'
 
 # Geocoding
 gem 'geocoder'
