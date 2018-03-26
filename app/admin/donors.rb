@@ -64,6 +64,8 @@ ActiveAdmin.register Donor do
       row :phone_numbers
       row :email
       row :number_of_donations do |donor| donor.donations.count; end
+      row :latitude
+      row :longitude
     end
 
     panel "Donations (Pickups)" do

@@ -1,11 +1,13 @@
 class Donor < ApplicationRecord
   include FormattingHelper
 
+  geocoded_by :full_address
+  after_validation :geocode, if: ->(obj){ obj.full_address_present? and obj.full_address_changed? }
+
   #  ====================
   #  = AR Accosciations =
   #  ====================
   has_many :donations
-
 
   #  ==================
   #  = AR Validations =
@@ -84,4 +86,13 @@ class Donor < ApplicationRecord
   def google_maps_url
     "https://www.google.com/maps/place/#{html_encoded_address}"
   end
+
+  def full_address_present?
+    address.present? && city.present? && state.present? && zip.present?
+  end
+
+  def full_address_changed?
+    address_changed? || city_changed? || state_changed? || zip_changed?
+  end
+
 end
