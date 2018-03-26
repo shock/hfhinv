@@ -30,7 +30,7 @@ ActiveAdmin.register Item do
       @item = Item.new
       donation = Donation.find(params[:item][:donation_id]) rescue nil
       @item.donation = donation
-      @item.date_received = Date.today unless donation.pickup? rescue nil
+      @item.date_received = Time.current.to_date unless donation.pickup? rescue nil
     end
 
     def scoped_collection

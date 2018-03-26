@@ -17,9 +17,9 @@ class Donation < ApplicationRecord
   #  =============
   #  = AR Scopes =
   #  =============
-  scope :past, -> { where("pickup_date < ?", Date.today) }
-  scope :today, -> { where("pickup_date = ?", Date.today) }
-  scope :future, -> { where("pickup_date > ?", Date.today) }
+  scope :past, -> { where("pickup_date < ?", Time.current.to_date) }
+  scope :today, -> { where("pickup_date = ?", Time.current.to_date) }
+  scope :future, -> { where("pickup_date > ?", Time.current.to_date) }
   scope :pickups, -> { where(pickup: true) }
   scope :received, -> { joins(:items).where.not(items: {date_received: nil})}
   scope :pickups_received, -> { pickups.received }

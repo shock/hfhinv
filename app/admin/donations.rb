@@ -34,8 +34,8 @@ ActiveAdmin.register Donation do
       if params[:donation] && (donor_id = params[:donation][:donor_id])
         @donation.donor_id = donor_id
       end
-      @donation.date_of_contact = Date.today
-      @donation.pickup_date = Date.today
+      @donation.date_of_contact = Time.current.to_date
+      @donation.pickup_date = Time.current.to_date
     end
   end
 
