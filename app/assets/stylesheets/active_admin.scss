@@ -102,4 +102,14 @@ div.form-indented fieldset legend span a {
 
 table.index_table {
   tr.odd td { background: $table-odd-color; }
+  tr.even td { background: $table-even-color; }
+}
+
+.table_tools .dropdown_menu_button.disabled {
+  opacity: 0.7;
+}
+
+.pagination_information {
+  color: #c8d2d8;
+  b { color: #5c6469; }
 }
