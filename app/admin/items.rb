@@ -80,18 +80,28 @@ ActiveAdmin.register Item do
     active_admin_comments
   end
 
+
   form do |f|
 
-    f.inputs 'Details' do
-      f.input :donation, collection: options_for_select(Donation.all.map{|d| ["#{d.description}", d.id]}, item.donation_id)
+    def options_for_item_type_select(current_item_type)
       item_type_descriptions = []
       Department.all.order(name: :asc).each do |department|
         department.item_types.order(name: :asc).map do |item_type|
-          item_type_descriptions << [item_type.description, item_type.id]
+          item_type_descriptions << [item_type.description, item_type.id, item_type.notes]
         end
-        item_type_descriptions << ["#{department.name} - Other", "-#{department.id}"]
+        item_type_descriptions << ["#{department.name} - Other", "-#{department.id}", ""]
       end
-      f.input :item_type, class: 'select2', collection: options_for_select(item_type_descriptions, item.item_type_id)
+      options = item_type_descriptions.map do |e|
+        selected = (e[1] == (current_item_type.id rescue nil))
+        "<option value=\"#{e[1]}\" #{selected ? 'selected="selected"' : ''} data-notes='#{e[2].gsub("'", "\'")}'>#{e[0]}</option>"
+      end
+      options = options.join("\n").html_safe
+      options
+    end
+
+    f.inputs 'Details' do
+      f.input :donation, collection: options_for_select(Donation.all.map{|d| ["#{d.description}", d.id]}, item.donation_id)
+      f.input :item_type, class: 'select2', collection: options_for_item_type_select(item.item_type)
       div class: 'form-indented new-item-form hidden' do
         output = "This will create a new Item Type in the "
         output << '<a href="javascript:void" class="new-item-department-name"></a>'

@@ -18,13 +18,13 @@ DONE:
 * Don't let admin delete Departments or ItemTypes if they have associated items
 * Create "Other" ItemType for all Departments, and have an freeform field for type name and code, as well as
 * Add "View on Map" for Donors and Donations.
+* Set place-holder text for item description based on selected ItemType notes
 
 TODO:
 * Use geokit gem to geocode donor addresses and determine optimal routes
   https://stackoverflow.com/questions/11804073/google-map-v3-how-to-get-list-of-best-driving-route-for-multiple-destinations
   OR
   https://github.com/graphhopper/graphhopper
-* Set place-holder text for item description based on selected ItemType notes
 * Once UseOfItem is set, auto-set the received_date to Today if it's not already
 * Create function to export Inventory Items for import into QuickBooks
 * Create function to import QuickBooks inventory and update date_sold, and sale_price
