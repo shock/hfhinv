@@ -55,6 +55,7 @@
 
 # Ignore local config files
 /config/settings.local.yml
+/config/secrets.yml
 
 # Ignore public asset files
 public/assets

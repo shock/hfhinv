@@ -1,0 +1,27 @@
+production: &production
+  geocoder:
+    redis:
+      url: <%= ENV['REDIS_URL'] %>
+    google_api_key: <%= ENV['GOOGLE_API_KEY'] %>
+  redis_url: <%= ENV['REDIS_URL'] %>
+  cache_settings:
+    enabled: false
+
+development: &development
+  <<: *production
+  geocoder:
+    redis:
+      url: 'redis://127.0.0.1:6379'
+    google_api_key: <%= ENV['GOOGLE_API_KEY'] %>
+  redis_url: 'redis://127.0.0.1:6379'
+
+test:
+  <<: *development
+
+staging:
+  <<: *production
+  geocoder:
+    redis:
+      url: <%= ENV['REDIS_URL'] %>
+    google_api_key: <%= ENV['GOOGLE_API_KEY'] %>
+  redis_url: <%= ENV['REDIS_URL'] %>
