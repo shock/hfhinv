@@ -6,8 +6,8 @@ check_for_other_item_type = ->
   if selected_val < 0
     department_id = 0 - selected_val # invert the negative that we inverted when creating the "Other" option
     department_name = $("select#item_item_type_id option:selected").text().split(' - ')[0]
-    $('#new-item-department-name').text(department_name)
-    $('#item_department_id').val(department_id)
+    $('a.new-item-department-name').text(department_name)
+    $('#item_new_item_type_department_id').val(department_id)
     $('div.new-item-form').show()
   else
     $('div.new-item-form').hide()

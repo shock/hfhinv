@@ -48,7 +48,7 @@ ActiveAdmin.register Donation do
     column :number_of_items, label: '# Items' do |donation| donation.items.count; end
     actions name: 'Actions', defaults: false do |donation|
       output = []
-      output << link_to("View", admin_donor_path(donation))
+      output << link_to("View", admin_donation_path(donation))
       output << link_to("Edit", edit_admin_donation_path(donation))
       output << link_to("Delete", admin_donation_path(donation), method: :delete,
         data: {confirm: "Are you sure you want to delete #{donation.description}?"})
@@ -100,7 +100,7 @@ ActiveAdmin.register Donation do
       end
       div class: 'action_items' do
         span class: 'action_item' do
-          link_to "Add Item", new_admin_item_path(item:{donation_id: donation.id}), class: 'default_button'
+          link_to "Add Donation Item", new_admin_item_path(item:{donation_id: donation.id}), class: 'default_button'
         end
       end
 
@@ -109,7 +109,6 @@ ActiveAdmin.register Donation do
   end
 
   form do |f|
-
     f.inputs 'Details' do
       f.input :donor, collection: options_for_select(Donor.all.map{|d| [d.full_name, d.id]}, donation.donor_id)
       # f.select :donor, collection: Donor.all

@@ -94,12 +94,13 @@ ActiveAdmin.register Item do
       f.input :item_type, class: 'select2', collection: options_for_select(item_type_descriptions, item.item_type_id)
       div class: 'form-indented new-item-form hidden' do
         output = "This will create a new Item Type in the "
-        output << '<a href="javascript:void" id="new-item-department-name"></a>'
-        output << " department.  Please be sure there is not an existing type that could be used first."
+        output << '<a href="javascript:void" class="new-item-department-name"></a>'
+        output << " department.  Please be sure there is not an existing "
+        output << '<a href="javascript:void" class="new-item-department-name"></a> type that could be used first.'
         f.inputs output.html_safe do
           f.input :new_item_type_department_id, as: :hidden
           f.input :new_item_type_name, as: :string, input_html: {placeholder: 'Enter a brief name for this type of item'}
-          f.input :new_item_type_code, as: :string, input_html: {placeholder: 'Enter inventory number code'}
+          f.input :new_item_type_code, as: :string, input_html: {placeholder: 'Enter code for inventory number'}
           f.input :new_item_type_notes, as: :string, input_html: {placeholder: 'Enter notes on how to describe these types of items'}
         end
       end

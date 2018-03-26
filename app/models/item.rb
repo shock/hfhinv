@@ -49,8 +49,8 @@ class Item < ApplicationRecord
 
   def check_for_new_item_type
     if self.new_item_type_department_id.present?
-      self.new_item_type_name = new_item_type_name.capitalize
-      self.new_item_type_code = new_item_type_code.capitalize
+      self.new_item_type_name = new_item_type_name.titleize
+      self.new_item_type_code = new_item_type_code.gsub(/\d+\Z/, '')
       item_type = ItemType.find_or_create_by(department_id: new_item_type_department_id, name: new_item_type_name, code: new_item_type_code)
       item_type.notes = new_item_type_notes
       item_type.notes = 'brief description' unless item_type.notes.present?
