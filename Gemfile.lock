@@ -94,9 +94,7 @@ GEM
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.6.0)
-    geocode (0.2.1)
-      json
-      trollop
+    geocoder (1.4.7)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     has_scope (0.7.1)
@@ -236,7 +234,6 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    trollop (2.1.2)
     turbolinks (5.1.0)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
@@ -269,7 +266,7 @@ DEPENDENCIES
   configatron
   devise
   flag_shih_tzu
-  geocode
+  geocoder
   hirb
   jbuilder (~> 2.5)
   json

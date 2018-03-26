@@ -57,7 +57,7 @@ gem 'flag_shih_tzu'
 gem 'pry'
 
 # Geocoding
-gem 'geocode'
+gem 'geocoder'
 
 # Exporting models to CSV
 gem 'comma'
