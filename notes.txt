@@ -17,6 +17,7 @@ DONE:
 * include description in Items filter
 * Don't let admin delete Departments or ItemTypes if they have associated items
 * Create "Other" ItemType for all Departments, and have an freeform field for type name and code, as well as
+* Add "View on Map" for Donors and Donations.
 
 TODO:
 

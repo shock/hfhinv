@@ -46,7 +46,16 @@ ActiveAdmin.register Donation do
     column :pickup
     column :pickup_date
     column :number_of_items, label: '# Items' do |donation| donation.items.count; end
-    actions name: 'Actions'
+    actions name: 'Actions', defaults: false do |donation|
+      output = []
+      output << link_to("View", admin_donor_path(donation))
+      output << link_to("Edit", edit_admin_donation_path(donation))
+      output << link_to("Delete", admin_donation_path(donation), method: :delete,
+        data: {confirm: "Are you sure you want to delete #{donation.description}?"})
+      output << link_to("View on Map", donation.donor.google_maps_url, target: "_blank")
+      output.join(' ').html_safe
+    end
+
   end
 
   show title: proc{ |donation| donation.description} do
