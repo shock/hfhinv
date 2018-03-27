@@ -35,10 +35,11 @@ ActiveAdmin.register ItemType do
   index do
     selectable_column
     id_column unless Rails.env.production?
-    column :name do |item_type| link_to(item_type.name, admin_item_type_path(item_type)); end
+    column :name
     column :code
     column :notes
     column :department, sortable: 'departments.name'
+    column 'Items', :items_count
     actions name: 'Actions', defaults: false do |item_type|
       output = []
       output << link_to("View", admin_item_type_path(item_type))

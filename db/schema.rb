@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326205354) do
+ActiveRecord::Schema.define(version: 20180327164104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180326205354) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "items_count", default: 0, null: false
   end
 
   create_table "donations", force: :cascade do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180326205354) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "pickup"
+    t.integer "items_count", default: 0, null: false
   end
 
   create_table "donors", force: :cascade do |t|
@@ -80,6 +82,7 @@ ActiveRecord::Schema.define(version: 20180326205354) do
     t.datetime "updated_at", null: false
     t.float "longitude"
     t.float "latitude"
+    t.integer "donations_count", default: 0, null: false
   end
 
   create_table "item_types", force: :cascade do |t|
@@ -89,6 +92,7 @@ ActiveRecord::Schema.define(version: 20180326205354) do
     t.datetime "updated_at", null: false
     t.string "code"
     t.string "notes"
+    t.integer "items_count", default: 0, null: false
   end
 
   create_table "items", force: :cascade do |t|
@@ -112,6 +116,7 @@ ActiveRecord::Schema.define(version: 20180326205354) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "items_count", default: 0, null: false
   end
 
   create_table "zip_codes", force: :cascade do |t|

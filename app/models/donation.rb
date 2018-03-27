@@ -3,7 +3,7 @@ class Donation < ApplicationRecord
   #  ====================
   #  = AR Asccociations =
   #  ====================
-  belongs_to :donor
+  belongs_to :donor, counter_cache: true
   has_many :items
 
   #  ==================

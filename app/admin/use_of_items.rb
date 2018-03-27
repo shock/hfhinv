@@ -21,6 +21,7 @@ ActiveAdmin.register UseOfItem do
     selectable_column
     id_column unless Rails.env.production?
     column :name
+    column 'Items', :items_count
     actions name: 'Actions', defaults: false do |use_of_item|
       output = []
       output << link_to("View", admin_use_of_item_path(use_of_item))

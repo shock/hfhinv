@@ -4,9 +4,9 @@ class Item < ApplicationRecord
   #  ===================
   #  = AR Associations =
   #  ===================
-  belongs_to :donation
-  belongs_to :item_type, optional: true
-  belongs_to :use_of_item, optional: true
+  belongs_to :donation, counter_cache: true
+  belongs_to :item_type, optional: true, counter_cache: true
+  belongs_to :use_of_item, optional: true, counter_cache: true
   has_one :department, through: :item_type
 
   #  ======================

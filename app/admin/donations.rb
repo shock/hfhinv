@@ -45,7 +45,7 @@ ActiveAdmin.register Donation do
     column :donor
     column :pickup
     column :pickup_date
-    column '# Items', :number_of_items do |donation| donation.items.count; end
+    column 'Items', :items_count
     actions name: 'Actions', defaults: false do |donation|
       output = []
       output << link_to("View", admin_donation_path(donation))

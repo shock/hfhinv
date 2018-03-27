@@ -131,18 +131,30 @@ body.update.admin_items {
 }
 
 div.form-indented fieldset legend span a {
-  // @include secondary-gradient;
-  // @include text-shadow;
-  // border: solid 1px #cdcdcd;
-  // @include border-colors(#e6e6e6, #d4d4d4, #cdcdcd);
-  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 0 1px #FFF inset;
-
-  // font-size: 1em;
-  // font-weight: bold;
-  // line-height: 18px;
-  // margin-bottom: 0.5em;
   color: $section-header-text-color;
-
-  // padding: 5px 10px 3px 10px;
   text-decoration: none;
+}
+
+body.index.admin_donors {
+  .col-num_donations {
+    max-width: 7em;
+  }
+  .col-phone {
+    min-width: 7em;
+  }
+}
+
+body.index.admin_donations {
+  .col-actions {
+    min-width: 18em;
+  }
+  .col-phone {
+    min-width: 7em;
+  }
+}
+
+body.index.admin_item_types {
+  .col-actions {
+    // width: 7em;
+  }
 }
