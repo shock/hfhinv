@@ -1,0 +1,91 @@
+@mixin basic-button {
+  @include rounded(200px);
+  display: inline-block;
+  font-weight: bold;
+  font-size: 1.0em;
+  @include sans-family;
+  line-height: 12px;
+  margin-right: 3px;
+  padding: 7px 16px 6px;
+  text-decoration: none;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+}
+
+@mixin default-button {
+  @include basic-button;
+  @include gradient(lighten($default-button-color, 15%), darken($default-button-color, 12%));
+  @include text-shadow(darken($default-button-color,20%));
+  box-shadow: 0 1px 1px rgba(0,0,0,0.10), 0 1px 0 0px rgba(255,255,255, 0.2) inset;
+  border: solid 1px #484e53;
+  @include border-colors(darken($default-button-color,15%), darken($default-button-color,18%), darken($default-button-color,23%));
+  color: #efefef;
+  letter-spacing: 0.04em;
+
+  &:not(.disabled) {
+    &:hover{
+      @include gradient(lighten($default-button-color, 18%), darken($default-button-color, 9%));
+    }
+
+    &:active {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.40) inset, 0 1px 0 0px #FFF;
+      @include gradient(lighten($default-button-color, 8%), darken($default-button-color, 17%));
+    }
+  }
+}
+
+@mixin light-button {
+  @include basic-button;
+  @include gradient(#FFFFFF, #E7E7E7);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.10), 0 1px 0 0 rgba(255,255,255, 0.8) inset;
+  border: solid 1px #c7c7c7;
+  @include border-colors(#d3d3d3, #c7c7c7, #c2c2c2);
+  @include text-shadow;
+  color: $default-button-color;
+
+  &:not(.disabled) {
+    &:hover {
+      @include gradient(#FFFFFF, #F1F1F1);
+    }
+
+    &:active {
+      box-shadow: 0 1px 2px rgba(0,0,0,0.22) inset, 0 1px 0 0px #EEE;
+      @include border-colors(#c2c2c2, #b9b9b9, #b7b7b7);
+      @include gradient(#F3F3F3, #D8D8D8);
+    }
+  }
+
+}
+
+@mixin dark-button {
+  @include default-button;
+}
+
+@mixin small-button {
+  @include default-button;
+  @include gradient(lighten($small-button-color, 15%), darken($small-button-color, 12%));
+  @include border-colors(darken($small-button-color,15%), darken($small-button-color,16%), darken($small-button-color,18%));
+
+  text-decoration: none;
+  font-size: 0.9em;
+  line-height: 0.6em;
+  padding: 0.4em 0.5em;
+  font-weight: normal;
+
+  &:not(.disabled) {
+    &:hover{
+      @include gradient(lighten($small-button-color, 23%), lighten($small-button-color, 3%));
+      @include border-colors(darken($small-button-color,7%), darken($small-button-color,8%), darken($small-button-color,9%));
+    }
+
+    &:active {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.40) inset, 0 1px 0 0px #FFF;
+      @include gradient(lighten($small-button-color, 8%), darken($small-button-color, 17%));
+    }
+  }
+
+}

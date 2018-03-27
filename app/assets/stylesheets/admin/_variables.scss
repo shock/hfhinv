@@ -2,28 +2,37 @@
 // These override the defaults
 
 // Colors
-// $hfh-blue: #005596; // From Zakk's text
-$hfh-blue: #005596; // From https://prezi.com/sicjmhy72htx/habitat-for-humanity-new-branding-guidelines/
-$hfh-green: #54B948; // From Zakk's text
-// $hfh-green: rgb(195, 214, 0); // From https://prezi.com/sicjmhy72htx/habitat-for-humanity-new-branding-guidelines/
+// $hfh-master-blue: #005596; // From Zakk's text
+$hfh-master-blue: #005596; // From official branding guide
+$hfh-master-green: #54B948; // From official branding guide
+$hfh-master-black: #000000; // From official branding guide
+$hfh-primary-red: #DC241F; // From official branding guide
+$hfh-primary-yellow: #F1AB00; // From official branding guide
+$hfh-primary-orange: #9A3416; // From official branding guide
+$hfh-primary-purple: #4A207E; // From official branding guide
 $hfh-cool-grey: #888880; // From https://prezi.com/sicjmhy72htx/habitat-for-humanity-new-branding-guidelines/
-$hfh-black: #000000;
-$primary-color: $hfh-blue !default;
-$secondary-color: $hfh-green !default;
+
+$default-button-color: lighten($hfh-primary-purple, 10%);
+// $small-button-color: $default-button-color;
+// $small-button-color: lighten($default-button-color, 5%);
+$small-button-color: lighten($hfh-primary-orange, 10%);
+
+$primary-color: $hfh-master-blue !default;
+$secondary-color: $hfh-master-green !default;
 $body-background-color: lighten($secondary-color, 0%) !default;
-$text-color: #323537 !default;
-$link-color: #38678b !default;
-$link-color: $secondary-color !default;
+$text-color: #202020 !default;
+$link-color: daren($hfh-primary-purple, 20%) !default;
+// $link-color: $secondary-color !default;
 $section-header-text-color: $primary-color !default;
 $current-menu-item-background: lighten($primary-color, 12%) !default;
 $hover-menu-item-background: lighten($primary-color, 12%) !default;
-$table-stripe-color: lighten($primary-color, 57%) !default;
+$table-stripe-color: lighten($hfh-primary-yellow, 57%) !default;
 $table-selected-color: #d9e4ec !default;
 $error-color: #932419 !default;
 $blank-slate-primary-color: #AAA !default;
-$breadcrumbs-color: #8a949e !default;
+$breadcrumbs-color: #666d74 !default;
 $breadcrumbs-separator-color: #aab2ba !default;
-$required-field-marker-color: #aaa !default;
+$required-field-marker-color: #999 !default;
 $form-label-color: $section-header-text-color !default;
 $page-header-text-color: #cdcdcd !default;
 
@@ -40,5 +49,6 @@ $text-input-total-padding: $text-input-horizontal-padding * 2 + $border-width * 
 $blank-slate-border: 1px dashed #DADADA !default;
 
 // $table-stripe-color: lighten($primary-color, 100%) !default;
-$table-even-color: lighten($primary-color, 62%) !default;
-$table-odd-color: lighten($secondary-color, 36%);
+$panel-contents-color: lighten($hfh-primary-yellow, 52%) !default;
+$table-odd-color: lighten($hfh-primary-yellow, 52%) !default;
+$table-even-color: lighten($hfh-primary-yellow, 50%) !default;

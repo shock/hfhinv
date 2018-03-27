@@ -11,44 +11,30 @@
 @import "admin/variables";
 @import "active_admin/mixins";
 @import "active_admin/base";
-@import "admin/select2.min";
-@import "admin/mixins";
+@import "admin/mixins/buttons";
+@import "admin/vendor/select2.min";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
 
-a.default_button, .default_button {
-  @include default-button;
-  text-decoration: none;
+//  =========================
+//  = ActiveAdmin Overrides =
+//  =========================
+
+body {
+  font-size: 90%;
 }
 
-a.small_button, .small_button {
-  @include small-button;
+#title_bar h2 {
+  font-size: 2em;
 }
 
 div.table_actions, td.col-actions {
   a.member_link, a {
     @include small-button;
   }
-}
-
-td.col.col-phone {
-  width: 80px;
-}
-
-th.col.col-actions {
-  width: 12em;
-}
-
-form input[type=date] {
-  width: 120px;
-}
-
-#donation_special_instructions {
-  width: calc(100% - 30px);
-  height: 5em;
 }
 
 #header {
@@ -62,6 +48,67 @@ form input[type=date] {
       height: 27px;
     }
   }
+}
+
+.breadcrumb {
+  font-size: 0.8em;
+}
+
+table.index_table {
+  tr.odd td { background: $table-odd-color; }
+  tr.even td { background: $table-even-color; }
+}
+
+// --------- Tables inside Panels
+
+.panel_contents table {
+  tr.odd td { background: inherit; }
+  tr.even td { background: $table-stripe-color; }
+}
+
+
+
+.table_tools .dropdown_menu_button.disabled {
+  opacity: 0.7;
+}
+
+.pagination_information {
+  color: #d5e0e6;
+  b { color: #545b60; }
+}
+
+.section, .panel {
+  background: $panel-contents-color;
+}
+
+//  ================
+//  = Custom Rules =
+//  ================
+
+a.default_button, .default_button {
+  @include default-button;
+  text-decoration: none;
+}
+
+a.small_button, .small_button {
+  @include small-button;
+}
+
+td.col.col-phone {
+  width: 80px;
+}
+
+th.col.col-actions {
+  width: 12.4em;
+}
+
+form input[type=date] {
+  width: 120px;
+}
+
+#donation_special_instructions {
+  width: calc(100% - 30px);
+  height: 5em;
 }
 
 ul.items-list {
@@ -98,18 +145,4 @@ div.form-indented fieldset legend span a {
 
   // padding: 5px 10px 3px 10px;
   text-decoration: none;
-}
-
-table.index_table {
-  tr.odd td { background: $table-odd-color; }
-  tr.even td { background: $table-even-color; }
-}
-
-.table_tools .dropdown_menu_button.disabled {
-  opacity: 0.7;
-}
-
-.pagination_information {
-  color: #c8d2d8;
-  b { color: #5c6469; }
 }
