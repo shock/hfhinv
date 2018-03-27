@@ -20,9 +20,9 @@ DONE:
 * Add "View on Map" for Donors and Donations.
 * Set place-holder text for item description based on selected ItemType notes
 * Update styling based on HFH branding guide
+* Add CCHFH logo to Dashboard
 
 TODO:
-* Add CCHFH logo to Dashboard
 * Use geokit gem to geocode donor addresses and determine optimal routes
   https://stackoverflow.com/questions/11804073/google-map-v3-how-to-get-list-of-best-driving-route-for-multiple-destinations
   OR
