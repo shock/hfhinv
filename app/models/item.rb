@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   #  ===================
   #  = AR Associations =
   #  ===================
-  belongs_to :donation, counter_cache: true
+  belongs_to :donation, optional: true, counter_cache: true
   belongs_to :item_type, optional: true, counter_cache: true
   belongs_to :use_of_item, optional: true, counter_cache: true
   has_one :department, through: :item_type
@@ -17,6 +17,8 @@ class Item < ApplicationRecord
   #  ==================
   #  = AR Validations =
   #  ==================
+  validates :item_type_id, presence: { message: "You must select and item type" }
+  validates :donation_id, presence: { message: "Required for donated items" }, if: :donated
   validates :rejection_reason, presence: { message: 'Required when rejected' }, if: :rejected
   validates :description, presence: { message: 'Required for inventoried items' }, if: :inventoried
   validates :regular_price, presence: { message: 'Required for inventoried items' }, if: :inventoried
@@ -28,7 +30,8 @@ class Item < ApplicationRecord
   #  =========
   #  = Flags =
   #  =========
-  has_flags 1 => :in_stock
+  has_flags 1 => :in_stock,
+            2 => :donated
 
   #  =============
   #  = AR Scopes =
@@ -119,11 +122,63 @@ class Item < ApplicationRecord
     "#{use_of_item.name}" rescue nil
   end
 
+  def department_name
+    item_type.department.name rescue nil
+  end
+
+  def item_type_name
+    item_type.name rescue nil
+  end
+
+  def donation_description
+    donation.description rescue nil
+  end
+
   #  ========================================
   #  = aliases for default instance methods =
   #  ========================================
-  def price
+  def price; regular_price; end
+  def item_name; inventory_number; end
+  def item_description; description; end
+
+
+  #  ====================
+  #  = CSV file formats =
+  #  ====================
+
+  def csv_deparment_name
+    "Donated - #{department_name}"
+  end
+
+  comma do
+    __use__ :all
+  end
+
+  comma :all do
+    id 'Id'
+    inventory_number 'Item Name'
+    department_name
+    description 'Item Description'
     regular_price
+    item_type_name 'Item Type'
+    date_received
+    date_sold
+    in_stock
+    donated
+    donation_description 'Donation'
+    use_of_item_name 'Use of Item'
+    rejected
+    rejection_reason
+  end
+
+  comma :quick_books do
+    id 'Id'
+    inventory_number 'Item Name'
+    department_name
+    description 'Item Description'
+    regular_price
+    __static_column__ 'Item Type' do 'Inventory' end
+    __static_column__ 'Income Account' do 'Sales-Donated' end
   end
 
 private

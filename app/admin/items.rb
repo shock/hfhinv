@@ -13,7 +13,8 @@ ActiveAdmin.register Item do
   #
   permit_params :item_type_id, :expected, :donation_id, :use_of_item_id, :regular_price,
     :sale_price, :date_received, :date_sold, :rejected, :rejection_reason, :item_number, :description,
-    :new_item_type_department_id, :new_item_type_name, :new_item_type_code, :new_item_type_notes
+    :new_item_type_department_id, :new_item_type_name, :new_item_type_code, :new_item_type_notes,
+    :scope, :format
   #
   # or
   #
@@ -25,11 +26,22 @@ ActiveAdmin.register Item do
 
   before_action :new_item_defaults, only: [:new]
 
+  collection_action :export_items, method: :post do
+    filename = "inventory_export_#{Time.now.to_i}.csv"
+    scope = params[:scope].to_sym
+    format = params[:format].to_sym
+    set_csv_headers(filename)
+    csv_string = Item.send(scope).to_comma(format)
+    send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present',
+      :filename => filename)
+  end
+
   controller do
     def new_item_defaults
       @item = Item.new
       donation = Donation.find(params[:item][:donation_id]) rescue nil
       @item.donation = donation
+      @item.donated = true if donation
       @item.date_received = Time.current.to_date unless donation.pickup? rescue nil
     end
 
@@ -100,7 +112,8 @@ ActiveAdmin.register Item do
     end
 
     f.inputs 'Details' do
-      f.input :donation, collection: options_for_select(Donation.all.map{|d| ["#{d.description}", d.id]}, item.donation_id)
+      f.semantic_errors # shows errors on :base
+      f.input :donation, collection: donations_collection(item)
       f.input :item_type, class: 'select2', collection: options_for_item_type_select(item.item_type)
       div class: 'form-indented new-item-form hidden' do
         output = "This will create a new Item Type in the "
@@ -115,10 +128,10 @@ ActiveAdmin.register Item do
         end
       end
       f.input :description
-      f.input :date_received, as: :date_picker
+      f.input :date_received, as: :string, input_html: { class: "datepicker" }
       f.input :use_of_item
       f.input :regular_price
-      f.input :date_sold, as: :date_picker
+      f.input :date_sold, as: :string, input_html: { class: "datepicker" }
       f.input :sale_price
       f.input :rejected, label: 'Rejected at Pickup'
       f.input :rejection_reason

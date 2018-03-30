@@ -100,7 +100,7 @@ ActiveAdmin.register Donation do
       end
       div class: 'action_items' do
         span class: 'action_item' do
-          link_to "Add Donation Item", new_admin_item_path(item:{donation_id: donation.id}), class: 'default_button'
+          link_to "Add Another Item", new_admin_item_path(item:{donation_id: donation.id}), class: 'default_button'
         end
       end
 

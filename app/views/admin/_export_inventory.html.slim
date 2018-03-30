@@ -1,0 +1,26 @@
+= form_tag export_items_admin_items_path, method: :post do
+  fieldset
+    legend Scope
+    ol
+      li
+        = radio_button_tag(:scope, "all")
+        = label_tag(:scope_all, "All")
+      li
+        = radio_button_tag(:scope, "in_stock", true)
+        = label_tag(:scope_in_stock, "In Stock")
+      li
+        = radio_button_tag(:scope, "donataed")
+        = label_tag(:scope_donataed, "Donated")
+      li
+        = radio_button_tag(:scope, "sold")
+        = label_tag(:scope_sold, "Sold")
+  fieldset
+    legend Export Format
+    ol
+      li
+        = radio_button_tag(:format, "all")
+        = label_tag(:format_all, "All fields")
+      li
+        = radio_button_tag(:format, "quick_books", true)
+        = label_tag(:format_in_stock, "QuickBooks Import File")
+  = submit_tag("Export as CSV")

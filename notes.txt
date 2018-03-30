@@ -25,6 +25,8 @@ DONE:
 * Add CCHFH logo to Dashboard
 * Modify Item form and move UseOfItem field up
 * Create ZipCode model, so we can associate zipcodes/towns with delivery/pickup days of the week
+* Create SystemState model
+
 
 TODO:
 

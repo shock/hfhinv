@@ -23,13 +23,29 @@ check_for_other_item_type = ->
     $('div.new-item-form').hide()
     return true
 
+process_donation_selection = ->
+  val = $('#item_donation_id').val()
+  if val == ""
+    return
+  else
+    return
+
 $ ->
   $('select#item_item_type_id').select2()
   $('select#item_use_of_item_id').select2()
-  $('select#item_donation_id').select2()
+  $('select#item_donation_id').select2
+    placeholder: "N/A"
+    allowClear: true
   $('select#donation_donor_id').select2()
   $('select#item_type_department_id').select2()
   process_item_type_selection()
 
 
-$(document).on 'change', 'select#item_item_type_id', process_item_type_selection
+$(document).on 'change', 'body.new.admin_items select#item_item_type_id', process_item_type_selection
+$(document).on 'change', 'body.new.admin_items select#item_donation_id', process_donation_selection
+
+
+$.datepicker.setDefaults
+  buttonImageOnly: true
+  buttonImage: 'calendar.gif'
+  # buttonText: 'Calendar'
