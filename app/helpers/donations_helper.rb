@@ -9,4 +9,12 @@ module DonationsHelper
     end
     output.html_safe
   end
+
+  def admin_donation_link(donation)
+    output = ""
+    if donation.present?
+      output << link_to(donation.description, admin_donation_path(donation))
+    end
+    output.html_safe
+  end
 end

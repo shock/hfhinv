@@ -5,6 +5,7 @@ ActiveAdmin.register Item do
   scope :received
   scope :inventoried
   scope :in_stock
+  # scope :donated
   scope :sold
   config.sort_order = 'departments.name_asc'
 
@@ -14,7 +15,7 @@ ActiveAdmin.register Item do
   permit_params :item_type_id, :expected, :donation_id, :use_of_item_id, :regular_price,
     :sale_price, :date_received, :date_sold, :rejected, :rejection_reason, :item_number, :description,
     :new_item_type_department_id, :new_item_type_name, :new_item_type_code, :new_item_type_notes,
-    :scope, :format
+    :scope, :format, :preview
   #
   # or
   #
@@ -27,13 +28,18 @@ ActiveAdmin.register Item do
   before_action :new_item_defaults, only: [:new]
 
   collection_action :export_items, method: :post do
-    filename = "inventory_export_#{Time.now.to_i}.csv"
     scope = params[:scope].to_sym
     format = params[:format].to_sym
-    set_csv_headers(filename)
-    csv_string = Item.send(scope).to_comma(format)
-    send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present',
-      :filename => filename)
+    items = Item.send(scope)
+    csv = items.to_comma(format)
+    if params[:commit] == "Preview"
+      render partial: 'admin/export_inventory', locals: {preview: csv}
+    else
+      filename = "inventory_export_#{Time.now.to_i}.csv"
+      set_csv_headers(filename)
+      send_data(csv, :type => 'text/csv; charset=utf-8; header=present',
+        :filename => filename)
+    end
   end
 
   controller do
@@ -63,7 +69,7 @@ ActiveAdmin.register Item do
     # column :sale_price
     column :date_received
     column :in_stock
-    column :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)); end
+    column :donation do |item| admin_donation_link(item.donation); end
     column :inventory_number
     actions name: 'Actions'
   end
@@ -71,7 +77,7 @@ ActiveAdmin.register Item do
 
   show title: proc{ |item| item.full_description } do
     attributes_table do
-      row :donation do |item| link_to(item.donation.description, admin_donation_path(item.donation)) end
+      row :donation do |item| admin_donation_link(item.donation) end
       row :item_type do |item| item.summary_description end
       row :description
       row :date_received
@@ -86,7 +92,11 @@ ActiveAdmin.register Item do
 
     panel "Actions" do
       output = []
-      output << link_to("Add Another Item to Donation: #{item.donation.description}", new_admin_item_path(item:{donation_id: item.donation.id}), class: 'default_button')
+      if item.donation_id.present?
+        output << link_to("Add Another Item to Donation: #{item.donation.description}", new_admin_item_path(item:{donation_id: item.donation.id}), class: 'default_button')
+      else
+        output << link_to("Create Another Item", new_admin_item_path, class: 'default_button')
+      end
       output.join(" ").html_safe
     end
     active_admin_comments
@@ -151,6 +161,7 @@ ActiveAdmin.register Item do
   }
   filter :use_of_item
   flag_filter :in_stock
+  flag_filter :donated
   filter :inventory_number
   filter :date_sold
   filter :date_received

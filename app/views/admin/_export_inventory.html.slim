@@ -24,3 +24,12 @@
         = radio_button_tag(:format, "quick_books", true)
         = label_tag(:format_in_stock, "QuickBooks Import File")
   = submit_tag("Export as CSV")
+  / = submit_tag("Preview")
+  / = link_to "Preview", export_items_admin_items_path(preview: 'true'), class: 'default_button'
+
+- preview ||= nil
+- if preview.present?
+  panel 'Preview'
+    - csv = CSV.parse(preview, headers: true, skip_blanks: true)
+    = render partial: 'admin/csv_to_html', locals: {csv: csv}
+

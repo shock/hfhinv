@@ -1,0 +1,10 @@
+- csv ||= nil
+- if csv.present?
+  table
+    tr
+      - csv.headers.each do |header|
+        th #{header}
+    - csv.each do |row|
+      tr
+        - row.each do |col|
+         td #{col[1]}

@@ -47,8 +47,7 @@ class Item < ApplicationRecord
   #  = AR Callbacks  =
   #  ================
   before_validation :check_for_new_item_type
-  before_save :check_update_inventory_number
-  before_save :update_in_stock_flag
+  before_save :check_update_inventory_number, :update_in_stock_flag, :update_donated_flag
 
   def check_for_new_item_type
     if self.new_item_type_department_id.present?
@@ -84,6 +83,12 @@ class Item < ApplicationRecord
       self.item_type.code.present? &&
       !self.sold?
   end
+  private :update_in_stock_flag
+
+  def update_donated_flag
+    self.donated = self.donation_id.present?
+  end
+  private :update_donated_flag
 
   #  ====================
   #  = Instance Methods =
