@@ -26,11 +26,11 @@ DONE:
 * Modify Item form and move UseOfItem field up
 * Create ZipCode model, so we can associate zipcodes/towns with delivery/pickup days of the week
 * Create SystemState model
+* Create function to export Inventory Items for import into QuickBooks (MVP)
 
 
 TODO:
-
-* Create function to export Inventory Items for import into QuickBooks (MVP)
+* Bug when selecting/Other type, and creating a new Item (look at heroky logs)
 * Create function to import QuickBooks inventory and update date_sold, and sale_price (MVP)
 * We need to reset the starting sequential item ID before production (the integer that gets sent to QB) when we switch over, so the ID numbers do not overlap.  During beta, we may need to let the user enter the ID manually, to match the generated ID from the Excel Inventory spreadsheet.  I'm not sure if this is MVP.  If we can *guarantee* uniqueness of the "inventory number", the item ID will be redundant, but it would optimize database lookups.
 * Admin can generate printable/exportable reports (see notes from discussions with Zakk/Mike)
@@ -47,6 +47,7 @@ TODO:
     https://github.com/activeadmin/activeadmin/wiki/combine-datetime-picker-with-activeadmin
 * Map subdomains on cchfh.org to heroku's domains. eg. inventory.cchfh.org maps to production heroku domain
 * Make this mofo the POS, instead of QB.  Numerous benefits!  Would need a card reader like Square for CC/debit cards.
+
 
  =======================
  = DOTW Zips and towns =
