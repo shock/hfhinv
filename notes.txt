@@ -31,10 +31,20 @@ DONE:
 
 TODO:
 * Bug when selecting/Other type, and creating a new Item (look at heroky logs)
+* Show dotw on donations under Donor show panel
+
+* Museum of Osteology
 * Create function to import QuickBooks inventory and update date_sold, and sale_price (MVP)
+* Noble is all one zip code: 73068 (says Zakk)
+* Moore has two zips: 73160, 73170
 * We need to reset the starting sequential item ID before production (the integer that gets sent to QB) when we switch over, so the ID numbers do not overlap.  During beta, we may need to let the user enter the ID manually, to match the generated ID from the Excel Inventory spreadsheet.  I'm not sure if this is MVP.  If we can *guarantee* uniqueness of the "inventory number", the item ID will be redundant, but it would optimize database lookups.
+
 * Admin can generate printable/exportable reports (see notes from discussions with Zakk/Mike)
+* Auto-email receipts to customer if they opted in for it, when all items are entered.
+
 * Export a Pickup Manifest for a given date, (perhaps as HTML), and allow printing clean format from browser
+* Add a general received flag for donations. (sometimes truck has to make multiple trips per day, so optimizing for a single route may not always work)
+
 * when listing items for a donation that has been picked_up, highlight items that have not be marked as received
 * Use geokit gem to geocode donor addresses and determine optimal routes
   https://stackoverflow.com/questions/11804073/google-map-v3-how-to-get-list-of-best-driving-route-for-multiple-destinations
@@ -53,12 +63,14 @@ TODO:
  = DOTW Zips and towns =
  =======================
 
+
+Pickups are all in Cleveland County
 Monday
 - 73072, 73069
 Tuesday
 - 73071, 73069
 Wednesday
-- Moore and OKC
+- Moore and Southen OKC
 - 73160, 73165, 73170
 Thursday
 - 73072, 73069
@@ -79,11 +91,6 @@ Friday
 = Questions for Zakk =
 ======================
 
-
-** get zipcode -> weekday mappings from Zakk or Mike and validate donation pickup_dates
-  - do make exceptions, just add warning when dotw does not match zip
-
-** Find out if we can conigure QuickBooks to export sales data with items ID, item#, sale price, and sale date
 
 ===============
 = Other notes =

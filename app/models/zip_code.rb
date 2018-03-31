@@ -4,7 +4,7 @@ class ZipCode < ActiveRecord::Base
   geocoded_by :zipcode
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
-      reload
+      obj.reload
       obj.city      = geo.city
       obj.state     = geo.state_code
       obj.zipcode   = geo.postal_code
