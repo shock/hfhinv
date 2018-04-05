@@ -27,12 +27,12 @@ DONE:
 * Create ZipCode model, so we can associate zipcodes/towns with delivery/pickup days of the week
 * Create SystemState model
 * Create function to export Inventory Items for import into QuickBooks (MVP)
-
+* Bug when selecting/Other type, and creating a new Item (look at heroky logs)
 
 TODO:
-* Bug when selecting/Other type, and creating a new Item (look at heroky logs)
+* Seed the database with 'Misc' Item Types for some categories (Zakk curates).  Next, more importantly:
+* Change the description for "Other" in Department item type to "Create New" (because we'll have the Misc category for truly miscellaneous stuff)
 * Show dotw on donations under Donor show panel
-
 * Museum of Osteology
 * Create function to import QuickBooks inventory and update date_sold, and sale_price (MVP)
 * Noble is all one zip code: 73068 (says Zakk)
