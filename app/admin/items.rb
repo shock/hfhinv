@@ -109,7 +109,7 @@ ActiveAdmin.register Item do
       item_type_descriptions = []
       Department.all.order(name: :asc).each do |department|
         department.item_types.order(name: :asc).map do |item_type|
-          item_type_descriptions << [item_type.description, item_type.id, item_type.notes]
+          item_type_descriptions << [item_type.description, item_type.id, item_type.notes || ""]
         end
         item_type_descriptions << ["#{department.name} - Other", "-#{department.id}", ""]
       end
@@ -147,7 +147,11 @@ ActiveAdmin.register Item do
       f.input :rejection_reason
     end
     f.actions
-
+    if item.donation.present?
+      para do
+        link_to "Back To Donation", admin_donation_path(item.donation), class: 'default_button'
+      end
+    end
   end
 
   filter :donation, collection: -> {
