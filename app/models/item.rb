@@ -100,10 +100,12 @@ class Item < ApplicationRecord
 
   def summary_description
     "#{item_type.department.name} - #{item_type.name}"
+  rescue
+    "Invalid Item Type - Not Set"
   end
 
   def full_description
-    d = "#{item_type.department.name} - #{item_type.name}"
+    d = summary_description
     d << " (#{inventory_number})" if inventory_number.present?
     d
   end
