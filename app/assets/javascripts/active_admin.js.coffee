@@ -2,13 +2,11 @@
 #= require admin/select2.min
 
 process_item_type_selection = ->
-  body = $('body')
-  if body.hasClass('edit') && body.hasClass('admin_items')
-    if check_for_other_item_type()
-      notes = $("select#item_item_type_id option:selected").data('notes')
-      $('#item_description').attr('placeholder', notes)
-    else
-      $('#item_description').attr('placeholder', '')
+  if check_for_other_item_type()
+    notes = $("select#item_item_type_id option:selected").data('notes')
+    $('#item_description').attr('placeholder', notes)
+  else
+    $('#item_description').attr('placeholder', '')
 
 check_for_other_item_type = ->
   selected_val = parseInt($('select#item_item_type_id').val())
@@ -41,8 +39,8 @@ $ ->
   process_item_type_selection()
 
 
-$(document).on 'change', 'body.new.admin_items select#item_item_type_id', process_item_type_selection
-$(document).on 'change', 'body.new.admin_items select#item_donation_id', process_donation_selection
+$(document).on 'change', 'body.admin_items select#item_item_type_id', process_item_type_selection
+$(document).on 'change', 'body.admin_items select#item_donation_id', process_donation_selection
 
 
 $.datepicker.setDefaults
