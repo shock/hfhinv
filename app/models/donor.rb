@@ -7,7 +7,7 @@ class Donor < ApplicationRecord
   #  ====================
   #  = AR Accosciations =
   #  ====================
-  has_many :donations
+  has_many :donations, dependent: :destroy
 
   #  ==================
   #  = AR Validations =
