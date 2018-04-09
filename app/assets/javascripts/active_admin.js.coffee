@@ -18,6 +18,7 @@ check_for_other_item_type = ->
     $('div.new-item-form').show()
     return false
   else
+    $('#item_new_item_type_department_id').val("")
     $('div.new-item-form').hide()
     return true
 

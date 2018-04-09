@@ -111,7 +111,9 @@ ActiveAdmin.register Item do
         department.item_types.order(name: :asc).map do |item_type|
           item_type_descriptions << [item_type.description, item_type.id, item_type.notes || ""]
         end
-        item_type_descriptions << ["#{department.name} - Other", "-#{department.id}", ""]
+        unless department.name == "Miscellaneous"
+          item_type_descriptions << ["#{department.name} - Other", "-#{department.id}", ""]
+        end
       end
       options = item_type_descriptions.map do |e|
         selected = (e[1] == (current_item_type.id rescue nil))

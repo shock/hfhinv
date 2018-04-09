@@ -203,7 +203,9 @@ DEPARTMENTS = {
     {name: "China Set", code: "China", notes: "brief description if possible"},
     {name: "Music", code: "", notes: ""},
   ],
-  "Miscellaneous" => []
+  "Miscellaneous" => [
+    {name: "Miscellaneous", code: "Misc", notes: "brief description if necessary"},
+  ]
 }
 
 puts "Creating Departments and Item Types"

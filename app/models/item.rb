@@ -46,12 +46,20 @@ class Item < ApplicationRecord
   #  ================
   #  = AR Callbacks  =
   #  ================
-  before_validation :check_for_new_item_type
-  before_save :hack_around_negative_item_type_ids, :check_update_inventory_number,
+  before_validation :hack_around_negative_item_type_ids, :check_for_new_item_type
+  before_save :check_update_inventory_number,
     :update_in_stock_flag, :update_donated_flag
 
+  def hack_around_negative_item_type_ids
+    if item_type_id.to_i < 0
+      self.item_type_id = nil
+    end
+    return true
+  end
+  private :hack_around_negative_item_type_ids
+
   def check_for_new_item_type
-    if self.new_item_type_department_id.present?
+    if self.new_item_type_department_id.present? && !self.item_type.present?
       self.new_item_type_name = new_item_type_name.titleize
       self.new_item_type_code = new_item_type_code.gsub(/\d+\Z/, '')
       item_type = ItemType.find_or_create_by(department_id: new_item_type_department_id, name: new_item_type_name, code: new_item_type_code)
@@ -60,16 +68,9 @@ class Item < ApplicationRecord
       self.item_type = item_type
     else
     end
+    return true
   end
   private :check_for_new_item_type
-
-  def hack_around_negative_item_type_ids
-    if item_type_id.to_i < 0
-      self.item_type_id = nil
-    end
-  end
-  private :hack_around_negative_item_type_ids
-
 
   def check_update_inventory_number
     if use_of_item_id_changed? || item_type_id_changed?
