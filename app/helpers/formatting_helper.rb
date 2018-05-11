@@ -15,6 +15,6 @@ module FormattingHelper
   end
 
   def dotw(date)
-    Date::DAYNAMES[date.wday].slice(0,3).upcase
+    Date::DAYNAMES[date.wday].slice(0,3).upcase rescue "N/A"
   end
 end
